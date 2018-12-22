@@ -1,0 +1,9 @@
+{
+    "require": {
+        "lasserafn/php-initial-avatar-generator": "^2.3"
+    },
+
+    "autoload": {
+        "psr-4": {"Navatar\\Plugin\\": "Plugin/"}
+    }
+}

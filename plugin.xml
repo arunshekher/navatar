@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Navatar" lan="LAN_NAVATAR_PLUGIN_NAME" version="1.0.0" date="2018-12-10" compatibility="2.0" installRequired="true" >
+    <author name="Arun S. Sekher" url="https://github.com/arunshekher" />
+    <summary lan="LAN_NAVATAR_PLUGIN_SUMMARY">A Plugin that generates username based avatar.</summary>
+    <description lan="LAN_NAVATAR_PLUGIN_DESCRIPTION">A Plugin that generates username based avatar.</description>
+    <copyright>Copyright Arun S. Sekher, Licensed under AGPL (https://www.gnu.org/licenses/agpl-3.0)</copyright>
+    <category>users</category>
+    <keywords>
+        <word>navatar</word>
+        <word>user</word>
+        <word>avatar</word>
+        <word>userimage</word>
+    </keywords>
+    <adminLinks>
+        <link url="admin_config.php" description="LAN_NAVATAR_PLUGIN_CONFIGURE" icon="images/navatar_32.png" iconSmall="images/navatar_16.png" icon128="images/navatar_128.png" primary="true" >LAN_CONGIGURE</link>
+    </adminLinks>
+    <pluginPrefs>
+        <pref name="avatar_active">1</pref>
+    </pluginPrefs>
+</e107Plugin>
