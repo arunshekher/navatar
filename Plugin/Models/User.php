@@ -10,7 +10,6 @@ class User
 		$tp = \e107::getParser();
 		$sql = \e107::getDb();
 
-		// this is paranoia
 		$userId = $tp->toDB($userId);
 
 		$query =
