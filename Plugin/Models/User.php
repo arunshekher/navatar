@@ -7,8 +7,12 @@ class User
 
 	public static function update($userId, $fileName)
 	{
-		//@todo sanitize variables for sql
+		$tp = \e107::getParser();
 		$sql = \e107::getDb();
+
+		// this is paranoia
+		$userId = $tp->toDB($userId);
+
 		$query =
 			"UPDATE `#user` SET user_image = '-upload-{$fileName}' WHERE user_image = '' AND user_id={$userId}";
 

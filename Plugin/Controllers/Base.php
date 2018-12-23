@@ -15,9 +15,9 @@
 
 namespace Navatar\Plugin\Controllers;
 
-use Navatar\Plugin\Navatar;
+use Navatar\Plugin\Main;
 
-class BaseController extends Navatar
+class Base extends Main
 {
 
 	/**
@@ -47,16 +47,17 @@ class BaseController extends Navatar
 
 
 
-	public static function __callStatic($name, $arguments)
-	{
-		$class = static::instantiate();
-
-		if (method_exists($class, $name)) {
-
-			return $class->$name(implode(',', $arguments));
-
-		}
-		return false;
-	}
+//	public static function __callStatic($name, $arguments)
+//	{
+//		$class = static::instantiate();
+//
+//		if (method_exists($class, $name)) {
+//
+//			return $class->$name(implode(',', $arguments));
+//          return  call_user_func_array([static::class, $name], $arguments);
+//
+//		}
+//		return false;
+//	}
 
 }

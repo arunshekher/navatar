@@ -4,19 +4,25 @@ namespace Navatar\Plugin\Controllers;
 
 
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
+use Navatar\Plugin\Main;
 use Navatar\Plugin\Models\User;
-use Navatar\Plugin\Navatar;
 
-class NavatarController extends BaseController
+class Navatar extends Base
 {
+
+	public static function create($data)
+	{
+		$controller = static::instantiate();
+		return $controller->createNavatar($data);
+	}
+
 	/**
 	 * @param $data
 	 *
 	 * @return array|bool
 	 */
-	public function create($data)
+	public function createNavatar($data)
 	{
-		//Navatar::log($data, 'login-trigger-navatar-controller');
 		// todo: if Navatar with user real name (Admin Option) call db with user_id
 
 		$fileName = 'ap_' . \e107::getParser()
@@ -27,11 +33,12 @@ class NavatarController extends BaseController
 
 			$avatar = new InitialAvatar();
 
-			$avatar->name($data['user_name'])->length(2)->fontSize(0.6)->size(250)
-				->background('#c2e3dc')->color('#fff')->generate()
+			$avatar->name($data['user_name'])->length(2)->fontSize(0.5)->size(250)
+				->background(Color::random())->color('#fff')->generate()
 				->save($path, 100);
 
-			//todo: clear thumbnail cache
+			//clear thumbnail cache
+			\e107::getCache()->clearAll('image');
 
 			// sql
 			$userId = (int)$data['user_id'];

@@ -2,22 +2,21 @@
 
 namespace Navatar\Plugin\Listeners;
 
-use Navatar\Plugin\Controllers\NavatarController;
-use Navatar\Plugin\Navatar;
+use Navatar\Plugin\Controllers\Navatar;
+use Navatar\Plugin\Main;
 
 class UserEvents
 {
 	public function confirmed($data)
 	{
-		Navatar::log('signup confirmed!', 'activation-trigger');
+		Main::log('signup confirmed!', 'activation-trigger');
 	}
 
 
 	public function login($data)
 	{
-		//Navatar::log($data, 'login-trigger');
-
-		NavatarController::create($data);
+		Main::log($data,'new-login-trigger');
+		Navatar::create($data);
 	}
 
 

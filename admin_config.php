@@ -12,14 +12,29 @@ class NavatarAdmin extends e_admin_dispatcher
 		'main' => [
 			'controller' => 'NavatarAdminController',
 			'path' => null,
-			'ui' => 'NavatarAdminFormUi',
+			'ui' => 'navatar_admin_form_ui',
 			'uipath' => null
+		],
+
+		'navatar'  => [
+			'controller' => 'NavatarAdminController',
+			'path'       => null,
+			'ui'         => 'navatar_admin_form_ui',
+			'uipath'     => null
 		]
 	];
 
 	protected $adminMenu = [
-		'main/prefs' => ['caption'=> 'Settings', 'perm' => '0']
+		'main/prefs' => [
+			'caption'=> 'Settings',
+			'perm' => 'P'
+		],
+		'navatar/custom' => [
+			'caption' => 'Color & Font',
+			'perm' => 'P'
+		]
 	];
+
 
 	protected $menuTitle = 'Navatar';
 
@@ -38,12 +53,16 @@ class NavatarAdminController extends e_admin_ui
 			'data' => 'int',
 			'help' => 'Activate/deactivate navatar plugin'
 		]
-
 	];
 
 }
 
 class NavatarAdminFormUi extends e_admin_form_ui
+{
+
+}
+
+class navatar_admin_form_ui extends e_admin_form_ui
 {
 
 }
