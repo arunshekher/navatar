@@ -1,12 +1,12 @@
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Join the chat at https://gitter.im/navatar-e107/Lobby](https://badges.gitter.im/navatar-e107/Lobby.svg)](https://gitter.im/navatar-e107/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 # NaVatar
-A user avatar plugin for e107 CMS.
+An e107 CMS plugin that generates user avatar that has your initials.
 
 ![navatar]()
 
 # Description
-NaVatar automatically creates username based avatar images for site users, if they have not already uploaded their own avatar images.
+NaVatar uses initials from usernames or real names of site users to automatically create avatar images if they haven't uploaded their own.
 # Contributions
 Community contributions to NaVatar plugin are welcome. Since the project is still in its infancy there are specific priorities for development right now. Please take a look at project [roadmap](https://github.com/arunshekher/navatar/projects/1 "NaVatar Roadmap") before contributing via issues and pull requests.
 

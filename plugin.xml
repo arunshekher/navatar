@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e107Plugin name="Navatar" lan="LAN_NAVATAR_PLUGIN_NAME" version="1.0.4" date="2018-12-10" compatibility="2.0" installRequired="true" >
     <author name="Arun S. Sekher" url="https://github.com/arunshekher" />
-    <summary lan="LAN_NAVATAR_PLUGIN_SUMMARY">A Plugin that generates username based avatar.</summary>
-    <description lan="LAN_NAVATAR_PLUGIN_DESCRIPTION">A Plugin that generates username based avatar images for users, if they have not uploaded their own.</description>
+    <summary lan="LAN_NAVATAR_PLUGIN_SUMMARY">An plugin that generates user avatar that has your initials.</summary>
+    <description lan="LAN_NAVATAR_PLUGIN_DESCRIPTION">A Plugin that uses initials from your username or real name to create avatar images for users if they haven't uploaded their own avatar images.</description>
     <copyright>Copyright Arun S. Sekher, Licensed under AGPL (https://www.gnu.org/licenses/agpl-3.0)</copyright>
     <category>users</category>
     <keywords>
