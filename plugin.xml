@@ -15,6 +15,6 @@
         <link url="admin_config.php" description="LAN_NAVATAR_PLUGIN_CONFIGURE" icon="images/navatar_32.png" iconSmall="images/navatar_16.png" icon128="images/navatar_128.png" primary="true" >LAN_CONGIGURE</link>
     </adminLinks>
     <pluginPrefs>
-        <pref name="avatar_active">1</pref>
+        <pref name="navatar_active">1</pref>
     </pluginPrefs>
 </e107Plugin>
