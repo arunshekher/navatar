@@ -4,6 +4,20 @@ namespace Navatar\Plugin;
 
 abstract class Main
 {
+	protected $prefs;
+
+
+	/**
+	 * Main constructor.
+	 *
+	 * @param $prefs
+	 */
+	public function __construct()
+	{
+		$this->prefs = \e107::getPlugPref('navatar');
+	}
+
+
 	/**
 	 * Performs debug logging by writing a log file to the plugin directory
 	 * @todo Change the log saving to e_LOG directory if there is something similar
