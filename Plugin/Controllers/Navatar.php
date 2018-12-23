@@ -25,27 +25,19 @@ class Navatar extends Base
 	{
 		// todo: if Navatar with user real name (Admin Option) call db with user_id
 
-		$fileName = 'ap_' . \e107::getParser()
-				->leadingZeros($data['user_id'], 7) . '_navatar.png';
-		$path = e_AVATAR_UPLOAD . $fileName;
+		$fileName = $this->generateFileName($data);
+		$path = $this->getPath($fileName);
 
-		if ( ! file_exists($path)) {
-
-			$avatar = new InitialAvatar();
-
-			$avatar->name($data['user_name'])->length(2)->fontSize(0.5)->size(250)
-				->background(Color::random())->color('#fff')->generate()
-				->save($path, 100);
+		if (! file_exists($path)) {
+			$this->generateNavatar($data, $path);
 
 			//clear thumbnail cache
 			\e107::getCache()->clearAll('image');
 
-			// sql
+			// database update
 			$userId = (int)$data['user_id'];
-
 			return User::update($userId, $fileName);
 		}
-
 		return false;
 	}
 
@@ -55,23 +47,23 @@ class Navatar extends Base
 	 *
 	 * @return string
 	 */
-	public function generateFilename($data)
+	public function generateFileName($data)
 	{
-		$filename = 'ap_' . \e107::getParser()
+		$fileName = 'ap_' . \e107::getParser()
 				->leadingZeros($data['user_id'], 7) . '_navatar.png';
 
-		return $filename;
+		return $fileName;
 	}
 
 
 	/**
-	 * @param $filename
+	 * @param $fileName
 	 *
 	 * @return string
 	 */
-	public function getPath($filename)
+	public function getPath($fileName)
 	{
-		return e_AVATAR_UPLOAD . $filename;
+		return e_AVATAR_UPLOAD . $fileName;
 	}
 
 
@@ -83,28 +75,15 @@ class Navatar extends Base
 	{
 		$avatar = new InitialAvatar();
 
-		$avatar->name($data['user_name'])->length(2)->fontSize(0.6)->size(350)
-			->background('#fb6277')->color('#fff')->generate()
+		$avatar->name($data['user_name'])
+			->length(2)
+			->fontSize(0.5)
+			->size(350)
+			->background(Color::random())
+			->color('#fff')
+			->generate()
 			->save($path, 100);
 	}
 
 
-	/**
-	 * @param $data
-	 * @param $filename
-	 *
-	 * @return array
-	 */
-	public static function updateUserRecord($data, $filename)
-	{
-		$userId = (int)$data['user_id'];
-
-		//@todo sanitize variables for sql
-		$sql = \e107::getDb();
-		$query =
-			//"UPDATE `#user` SET user_image = '-upload-{$filename}' WHERE LENGTH(user_image) = 0 AND user_id={$data['user_id']}";
-			"UPDATE `#user` SET user_image = '-upload-{$filename}' WHERE user_image = '' AND user_id={$userId}";
-
-		return $sql->fetch($sql->gen($query));
-	}
 }
