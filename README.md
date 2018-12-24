@@ -1,7 +1,7 @@
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Join the chat at https://gitter.im/navatar-e107/Lobby](https://badges.gitter.im/navatar-e107/Lobby.svg)](https://gitter.im/navatar-e107/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 # NaVatar
-Name + Avatar = 'NaVatar' connotes as 'New Avatar!'
+Name + Avatar = 'NaVatar', connotes as 'New Avatar!'
 An e107 CMS plugin that generates user avatar that has your initials.
 
 ![navatar]()
@@ -16,6 +16,7 @@ Community contributions to NaVatar plugin are welcome. Since the project is stil
 * Submit pull requests to - fix errors, squash bugs, refactor for performance, include language packs
 * Submit feature requests - added functionality, admin options etc.
 * Express gratitude - scientific studies continually prove that it can make you happier!! :wink: :laughing: :heart_eyes:
+* Heat up the development arms-race for e107 by writing some compelling code for it yourselves: - biological evolutionary arms-race has produced some of the most resilient organisms in real world. May be it applies equally in the virtual world!
 
 
 # Release History
