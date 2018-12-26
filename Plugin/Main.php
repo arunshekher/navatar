@@ -4,7 +4,19 @@ namespace Navatar\Plugin;
 
 abstract class Main
 {
+	/**
+	 * Navatar preferences
+	 *
+	 * @var array
+	 */
 	protected $prefs;
+
+	/**
+	 * Background colors array
+	 *
+	 * @var array
+	 */
+	protected $bgColors;
 
 
 	/**
@@ -15,16 +27,34 @@ abstract class Main
 	public function __construct()
 	{
 		$this->prefs = \e107::getPlugPref('navatar');
+		$this->bgColors
+			= $this->nlDelimStrToArray($this->prefs['background_colors']);
 	}
 
 
 	/**
-	 * Performs debug logging by writing a log file to the plugin directory
-	 * @todo Change the log saving to e_LOG directory if there is something similar
-	 * @param string|array $content
-	 *  The data to be logged - can be passed as string or array.
-	 * @param string $logname
-	 *  The name of log that need to be written to file-system.
+	 * Converts newline delimited string to numeric array
+	 *
+	 * @param string $inputString
+	 *
+	 * @return array
+	 */
+	protected function nlDelimStrToArray($inputString)
+	{
+		$str = str_replace(["\r\n", "\n\r"], "|", $inputString);
+
+		return explode("|", $str);
+	}
+
+
+	/**
+	 * Writes passed in data to a log file to the 'logs'
+	 *  directory inside plugin directory.
+	 *
+	 * @param mixed $content
+	 *  The data to be logged.
+	 * @param string $logName
+	 *  Name the log file that need to be written to file-system.
 	 */
 	public static function log($content, $logName = 'navatar-log')
 	{
