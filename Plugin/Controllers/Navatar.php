@@ -23,19 +23,22 @@ class Navatar extends Base
 	 */
 	public function createNavatar($data)
 	{
-		// todo: if Navatar with user real name (Admin Option) call db with user_id
 
+		$userId = (int)$data['user_id'];
 		$fileName = $this->generateFileName($data);
 		$path = $this->getPath($fileName);
 
-		if (! file_exists($path)) {
-			$this->generateNavatar($data, $path);
+		//Main::log(User::get($userId), 'user-with-no-avatar');
+
+		if (User::fit($userId) /*&& ! file_exists($path)*/) {
 
 			//clear thumbnail cache
 			\e107::getCache()->clearAll('image');
 
+			// call navatar generation method
+			$this->generateNavatar($data, $path);
+
 			// database update
-			$userId = (int)$data['user_id'];
 			return User::update($userId, $fileName);
 		}
 		return false;
@@ -73,17 +76,27 @@ class Navatar extends Base
 	 */
 	public function generateNavatar($data, $path)
 	{
+		// todo: if Navatar with username | real name (Admin Option) call db with user_id
+		// todo: font color, font variant...
 		$avatar = new InitialAvatar();
 
-		$avatar->name($data['user_name'])
-			->length(2)
-			->fontSize(0.5)
-			->size(350)
-			->background(Color::random())
-			->color('#fff')
-			->generate()
-			->save($path, 100);
-	}
+		/** @var TYPE_NAME $e */
+		try {
 
+			$avatar->name($data['user_name'])
+				->length(2)
+				->fontSize(0.5)
+				->size(350)
+				->background(Color::random())
+				->color('#fff')
+				->generate()
+				->save($path, 100);
+
+		} catch (\Exception $e) {
+		    Main::log($e, 'generation-error');
+		}
+
+
+	}
 
 }
