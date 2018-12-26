@@ -22,7 +22,7 @@ $PROJECT_MENU_TEMPLATE = '
 	</li>
 	<li>
 		<kbd style="word-wrap: break-word;font-size: x-small">
-			<a href="http://github.com/arunshekher/mentions" target="_blank">http://github.com/arunshekher/navatar</a>
+			<a href="https://github.com/arunshekher/navatar" target="_blank">https://github.com/arunshekher/navatar</a>
 		</kbd>
 	</li>
 	<li>&nbsp;</li>
