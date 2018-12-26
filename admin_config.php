@@ -21,15 +21,7 @@ class NavatarAdmin extends e_admin_dispatcher
 			'path' 			=> null,
 			'ui' 			=> 'navatar_form_ui',
 			'uipath' 		=> null
-		],
-
-		'custom'	=> [
-			'controller' 	=> 'NavatarCustom',
-			'path' 			=> null,
-			'ui' 			=> 'navatar_form_ui',
-			'uipath' 		=> null
-		],
-
+		]
 
 	];
 	
@@ -38,8 +30,8 @@ class NavatarAdmin extends e_admin_dispatcher
 			
 		'main/prefs' => ['caption'=> LAN_PREFS, 'perm' => 'P'],
 		'main/div0'      => ['divider'=> true],
-		'main/tidyup'		=> ['caption'=> 'Tidy-up Wizard', 'perm' => 'P'],
-		
+		'main/tidyup'		=> ['caption'=> 'Tidy-up Wizard', 'perm' => 'P']
+
 	];
 
 	protected $adminMenuAliases = [
@@ -79,7 +71,7 @@ class navatar_ui extends e_admin_ui
 				'title'=> 'User event that trigger navatar generation:',
 				'tab'=> 0,
 				'type'=>'dropdown',
-				'data' => 'str',
+				'data' => 'int',
 				'help'=> 'Which user event trigger generation of NaVatar.'
 			],
 
@@ -193,6 +185,65 @@ class navatar_ui extends e_admin_ui
 
 	}
 
+
+
+
+	public function tidyupPage()
+	{
+		$tp = e107::getParser();
+		$frm = e107::getForm();
+		$mes = e107::getMessage();
+
+		// test
+		//$this->listFiles();
+
+		$this->tidyupPageProcess();
+
+		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => User::count()]);
+		$mes->addInfo(LAN_NAVATAR_TIDY_INFO);
+		$message = $mes->render();
+
+		$text = '
+		<form method="post" action="' . e_SELF . '?' . e_QUERY . '">
+		' . $frm->checkbox('confirm-delete', 1, false, $confirmText) . '
+		' . $frm->admin_button('navatar-tidyup', 'Rollback Records', 'submit') . '
+		</form>';
+
+		return $message . $text;
+	}
+
+
+	public function tidyupPageProcess()
+	{
+		$mes = e107::getMessage();
+
+		if (strtolower($_SERVER['REQUEST_METHOD']) === 'post' && isset($_POST['navatar-tidyup'])) {
+
+			if (isset($_POST['confirm-delete'])) {
+
+				if (User::rollback()) {
+					return $mes->addSuccess('Record(s) rolled back successfully');
+				}
+				return $mes->addError('Nothing to rollback.');
+			}
+			return $mes->addWarning('Please tick confirm checkbox. Nothing rolled back.');
+		}
+		return false;
+	}
+
+
+	protected function listFiles()
+	{
+		$files = [];
+		foreach (glob(e_AVATAR_UPLOAD . '*_navatar.png') as $filename) {
+			//echo "$filename size " . filesize($filename) . "\n";
+			$files[] = "$filename size: " . filesize($filename);
+		}
+		Main::log($files, 'navatar-upload-dir');
+		//return $files;
+	}
+
+
 	public function renderHelp()
 	{
 		$template   = e107::getTemplate('navatar', 'project_menu');
@@ -212,89 +263,15 @@ class navatar_ui extends e_admin_ui
 
 	}
 
-
-	public function tidyupPage()
-	{
-		$tp = e107::getParser();
-		$frm = e107::getForm();
-
-		$this->tidyupPageProcess();
-
-		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => User::count()]);
-
-		$text = '
-		<form method="post" action="' . e_SELF . '?' . e_QUERY . '">
-		' . $frm->checkbox('confirm-delete', 1, false, $confirmText) . '
-		' . $frm->admin_button('navatar-tidyup', 'Remove', 'submit') . '
-		</form>';
-
-		return $text;
-	}
-
-
-	public function tidyupPageProcess()
-	{
-		if (strtolower($_SERVER['REQUEST_METHOD']) === 'post' && isset($_POST['navatar-tidyup'])) {
-
-			if (isset($_POST['confirm-delete'])) {
-
-				//print_a($_POST);
-
-				return User::rollback();
-			}
-			return false;
-
-		}
-		return false;
-	}
-
-
-
-	public function debug($data, $logName)
-	{
-		$path = \e_PLUGIN .'navatar/logs/';
-
-		if (! file_exists($path)) {
-			mkdir($path, 0777, true);
-		}
-
-		if (is_array($data) || is_object($data)) {
-			$data = var_export($data, true);
-		}
-
-		file_put_contents($path . $logName . '.txt', $data . PHP_EOL, FILE_APPEND);
-	}
-
 }
 
 
-class NavatarCustom
-{
 
-
-}
 				
 
 
 class navatar_form_ui extends e_admin_form_ui
 {
-
-	
-	// Custom Method/Function (pref)
-	public function delete_all($curVal,$mode)
-	{
-
-
-		switch($mode)
-		{
-			case 'write': // Edit Page
-				return $this->button('Delete', $curVal, 255, 'Delete All');
-			break;
-
-		}
-
-		return null;
-	}
 
 }		
 		
