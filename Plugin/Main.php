@@ -25,12 +25,13 @@ abstract class Main
 
 	protected function init($prefs)
 	{
-		$bgColorsArray = $this->delimitedStringToArray($prefs['background_colors']);
+		$colorsArray = $this->delimitedStringToArray($prefs['background_colors']);
 		unset($prefs['background_colors']);
-		$prefs['background_colors'] = $bgColorsArray;
+		$prefs['background_colors'] = $colorsArray;
+
 		$this->setPrefs($prefs);
 		//debug
-		Main::log($this->prefs, 'prefs-main-class');
+		//Main::log($this->prefs, 'main-class-prefs');
 	}
 
 	/**
