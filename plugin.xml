@@ -17,7 +17,7 @@
 		<pref name='master_active'>1</pref>
 		<pref name='user_trigger_event'>both</pref>
 		<pref name='job_queue_active'>0</pref>
-		<pref name='navatar_size'>350</pref>
+		<pref name='navatar_size'>250</pref>
 		<pref name='initials_source'>username</pref>
 		<pref name='php_graphics_lib'>gd</pref>
 		<pref name='character_length'>2</pref>
@@ -25,23 +25,26 @@
 		<pref name='font_size'>0.5</pref>
 		<pref name='font_variants'>/fonts/OpenSans-Semibold.ttf</pref>
 		<pref name='background_colors'>
-#50dea0
-#54738a
-#85b58f
-#333132
-#333132
-#187aab
-#fe342b
-#b09171
-#4263a7
-#5cc4ac
-#8fe0e5
-#f9d1ba
-#e0c9a4
-#cad3ab
-#bcd3dd
-#92b558
-#B0F566
+#55efc4
+#81ecec
+#74b9ff
+#a29bfe
+#dfe6e9
+#00b894
+#00cec9
+#0984e3
+#6c5ce7
+#b2bec3
+#ffeaa7
+#fab1a0
+#ff7675
+#fd79a8
+#636e72
+#fdcb6e
+#e17055
+#d63031
+#e84393
+#2d3436
 		</pref>
 		<pref name='random_bg_color'>1</pref>
 	</pluginPrefs>
