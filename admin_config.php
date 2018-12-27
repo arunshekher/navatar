@@ -5,6 +5,7 @@ if ( ! getperms('P') || ! e107::isInstalled('navatar')) {
 	exit;
 }
 
+use Navatar\Plugin\Controllers\Navatar;
 use Navatar\Plugin\Main;
 use Navatar\Plugin\Models\User;
 
@@ -194,18 +195,19 @@ class navatar_ui extends e_admin_ui
 		$frm = e107::getForm();
 		$mes = e107::getMessage();
 
-		// test
-		//$this->listFiles();
 
 		$this->tidyupPageProcess();
 
-		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => User::count()]);
-		$mes->addInfo(LAN_NAVATAR_TIDY_INFO);
-		$message = $mes->render();
+		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => '<span class="badge badge-light">' .User::count() . '</span>']);
+		$mes->addInfo(LAN_NAVATAR_TIDY_INFO, 'navatar-mstack');
+		$message = $mes->render('navatar-mstack');
+		$mes->reset('navatar-mstack');
 
 		$text = '
 		<form method="post" action="' . e_SELF . '?' . e_QUERY . '">
-		' . $frm->checkbox('confirm-delete', 1, false, $confirmText) . '
+		 <div class="form-group row">
+		' . $frm->checkbox('confirm-delete', 1, false, ['label'=> $confirmText, 'class'=>'form-check-label']) . '
+		</div>
 		' . $frm->admin_button('navatar-tidyup', 'Rollback Records', 'submit') . '
 		</form>';
 
@@ -216,17 +218,29 @@ class navatar_ui extends e_admin_ui
 	public function tidyupPageProcess()
 	{
 		$mes = e107::getMessage();
+		$tp = e107::getParser();
 
 		if (strtolower($_SERVER['REQUEST_METHOD']) === 'post' && isset($_POST['navatar-tidyup'])) {
 
 			if (isset($_POST['confirm-delete'])) {
 
 				if (User::rollback()) {
-					return $mes->addSuccess('Record(s) rolled back successfully');
+
+					$mes->addSuccess(LAN_NAVATAR_TIDY_MES_SUC_RECORDS_REMOVED, 'navatar-mstack');
+
+					$removal = Navatar::removeAll();
+					//Main::log($removal, 'files-failed-delete');
+
+					if (count($removal['fail']) > 0) {
+						$failMessage = $tp->lanVars(LAN_NAVATAR_TIDY_MES_WARN_FAIL_DELETE, ['files' => implode(', ', $removal['fail'])]);
+						return $mes->addWarning($failMessage, 'navatar-mstack');
+					} else {
+						return $mes->addStack(LAN_NAVATAR_TIDY_MES_SUC_FILES_REMOVED, 'navatar-mstack', E_MESSAGE_SUCCESS);
+					}
 				}
-				return $mes->addError('Nothing to rollback.');
+				return $mes->addError(LAN_NAVATAR_TIDY_MES_ERR_NO_RECORDS, 'navatar-mstack');
 			}
-			return $mes->addWarning('Please tick confirm checkbox. Nothing rolled back.');
+			return $mes->addWarning(LAN_NAVATAR_TIDY_MES_WARN_TICK, 'navatar-mstack');
 		}
 		return false;
 	}
@@ -236,11 +250,9 @@ class navatar_ui extends e_admin_ui
 	{
 		$files = [];
 		foreach (glob(e_AVATAR_UPLOAD . '*_navatar.png') as $filename) {
-			//echo "$filename size " . filesize($filename) . "\n";
 			$files[] = "$filename size: " . filesize($filename);
 		}
-		Main::log($files, 'navatar-upload-dir');
-		//return $files;
+		return $files;
 	}
 
 
