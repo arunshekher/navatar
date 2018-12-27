@@ -14,7 +14,7 @@ if (deftrue('BOOTSTRAP') && deftrue('FONTAWESOME')) {
 
 $PROJECT_MENU_TEMPLATE = '
 <div style="text-align: center">
-<img src="https://www.e107.space/projects/navatar/svg" alt="NaVatar" width="128" height="128">
+<img src="https://www.e107.space/projects/navatar/svg" alt="Navatar" width="128" height="128">
 </div>
 <ul class="list-unstyled">
 	<li>
