@@ -72,7 +72,7 @@ class navatar_ui extends e_admin_ui
 				'title'=> 'User event that trigger navatar generation:',
 				'tab'=> 0,
 				'type'=>'dropdown',
-				'data' => 'int',
+				'data' => 'str',
 				'help'=> 'Which user event trigger generation of Navatar.'
 			],
 
