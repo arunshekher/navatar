@@ -2,6 +2,8 @@
 
 namespace Navatar\Plugin\Controllers;
 
+use Navatar\Plugin\Main;
+
 class Color extends Base
 {
 
@@ -16,6 +18,9 @@ class Color extends Base
 		return $controller->randomColor();
 	}
 
+
+
+
 	/**
 	 * Returns a random color hex value from an array of values
 	 *
@@ -24,7 +29,7 @@ class Color extends Base
 	 */
 	private function randomColor()
 	{
-		return $this->randomValue($this->bgColors);
+		return trim($this->randomValue($this->prefs['background_colors']));
 	}
 
 
@@ -40,5 +45,9 @@ class Color extends Base
 		$values = array_values($array);
 		return $values[mt_rand(0, count($values) - 1)];
 	}
+
+
+
+
 
 }

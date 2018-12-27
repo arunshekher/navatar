@@ -24,8 +24,6 @@ class Navatar extends Base
 	 */
 	public function createNavatar($data)
 	{
-		Main::log($data, 'createNavatar-data');
-
 		$userId = (int)$data['user_id'];
 		$fileName = $this->generateFileName($data);
 		$path = $this->getPath($fileName);
@@ -78,8 +76,6 @@ class Navatar extends Base
 	 */
 	public function generateNavatar($data, $path)
 	{
-		Main::log($data, 'generateNavatar-data');
-
 		// todo: if Navatar with username | real name (Admin Option) call db with user_id
 		//  to get Real Name
 		// todo: Add font color, font variant etc - should it be class properties?
@@ -92,14 +88,14 @@ class Navatar extends Base
 		$fontVariant = '/fonts/OpenSans-Semibold.ttf';
 		$driver = '';
 
-		Main::log($backgroundColor, 'bankground-color-gererate-nava');
+		Main::log($fontSize, 'different-vars-gererateNavatar');
 
 		/** @var TYPE_NAME $e */
 		try {
 			$avatar = new InitialAvatar();
 
-			$avatar->name($data['user_name'])->length(1)->fontSize(0.5)
-				->size(350)->background('#333')->color('#fff')
+			$avatar->name($data['user_name'])->length($characterLength)->fontSize(0.5)
+				->size(350)->background($backgroundColor)->color($fontColor)
 				->generate()->save($path, 100);
 
 		}
@@ -127,7 +123,6 @@ class Navatar extends Base
 	protected function removeImages()
 	{
 		$unlinkStatus = [];
-		//$unlinkFail = [];
 
 		foreach (glob(e_AVATAR_UPLOAD . '*_navatar.png') as $filename) {
 
@@ -136,19 +131,13 @@ class Navatar extends Base
 				$unlinkStatus['success'][] = $filename;
 			} else if (is_file ($filename)) {
 				// unlink failed.
-				// you would have got an error if it wasn't suppressed
 				$unlinkStatus['fail'][] = $filename;
 			} else {
 				// file doesn't exist
+				$unlinkStatus['desist'][] = $filename;
 			}
 
-//			if (file_exists($filename)) {
-//				unlink($filename);
-//				continue;
-//			}
-//			$unlinkFail[$filename];
 		}
-		//return $unlinkFail;
 		return $unlinkStatus;
 	}
 

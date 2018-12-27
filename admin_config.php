@@ -60,12 +60,12 @@ class navatar_ui extends e_admin_ui
 
 		protected $prefs = [
 
-			'activate' => [
+			'master_active' => [
 				'title'=> 'Activate',
 				'tab'=> 0,
 				'type'=>'boolean',
 				'data' => 'int',
-				'help'=>'Activate NaVatar'
+				'help'=>'Activate Navatar'
 			],
 
 			'user_trigger_event' => [
@@ -73,7 +73,7 @@ class navatar_ui extends e_admin_ui
 				'tab'=> 0,
 				'type'=>'dropdown',
 				'data' => 'int',
-				'help'=> 'Which user event trigger generation of NaVatar.'
+				'help'=> 'Which user event trigger generation of Navatar.'
 			],
 
 			'job_queue_active' => [
@@ -89,7 +89,15 @@ class navatar_ui extends e_admin_ui
 				'tab'=> 0,
 				'type'=>'dropdown',
 				'data' => 'str',
-				'help'=> 'Which driver to use for NaVatar generation.'
+				'help'=> 'Which driver to use for Navatar generation.'
+			],
+
+			'navatar_size' => [
+				'title'=> 'Navatar Image Size:',
+				'tab'=> 0,
+				'type'=>'text',
+				'data' => 'int',
+				'help'=> 'Navatar Image Size. Default is 48x48 pixels.'
 			],
 
 			'initials_source' => [
@@ -171,9 +179,9 @@ class navatar_ui extends e_admin_ui
 	];
 
 	protected $userTrigger = [
-		1 => 'Login Event',
-		2 => 'Activation Event',
-		3 => 'Login OR Activation Event'
+		'login' => 'Login Event',
+		'activate' => 'Activation Event',
+		'both' => 'Login OR Activation Event'
 	];
 
 	
@@ -195,10 +203,13 @@ class navatar_ui extends e_admin_ui
 		$frm = e107::getForm();
 		$mes = e107::getMessage();
 
+		//test
+		//$this->listFontFiles();
 
 		$this->tidyupPageProcess();
 
-		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => '<span class="badge badge-light">' .User::count() . '</span>']);
+		$userCount = '<span class="badge badge-light">' .User::count() . '</span>';
+		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => $userCount]);
 		$mes->addInfo(LAN_NAVATAR_TIDY_INFO, 'navatar-mstack');
 		$message = $mes->render('navatar-mstack');
 		$mes->reset('navatar-mstack');
@@ -253,6 +264,16 @@ class navatar_ui extends e_admin_ui
 			$files[] = "$filename size: " . filesize($filename);
 		}
 		return $files;
+	}
+
+
+	protected function listFontFiles()
+	{
+		$fonts = glob(__DIR__ . '/vendor/lasserafn/php-initial-avatar-generator/src/fonts/*.ttf');
+		Main::log($fonts, 'font-list');
+//		foreach (glob(__DIR__ . '/vendor/lasserafn/php-initial-avatar-generator/src/fonts/*.ttf') as $font) {
+//			//echo "$filename size " . filesize($filename) . "\n";
+//		}
 	}
 
 
