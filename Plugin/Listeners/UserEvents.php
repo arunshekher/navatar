@@ -7,16 +7,17 @@ use Navatar\Plugin\Main;
 
 class UserEvents
 {
-	public function confirmed($data)
+	public function activate($data)
 	{
-		Main::log('signup confirmed!', 'activation-trigger');
+		Navatar::create($data);
+		//Main::log($data, 'activation-trigger');
 	}
 
 
 	public function login($data)
 	{
-		Main::log($data,'new-login-trigger');
 		Navatar::create($data);
+		//Main::log($data,'new-login-trigger');
 	}
 
 

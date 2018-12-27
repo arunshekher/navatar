@@ -13,13 +13,13 @@ if ($prefs['master_active']) {
 
 	if ($prefs['user_trigger_event'] === 'both') {
 		e107::getEvent()->register('user_signup_activated',
-			[UserEvents::class, 'confirmed']);
+			[UserEvents::class, 'activate']);
 		e107::getEvent()->register('login', [UserEvents::class, 'login']);
 	}
 
 	if ($prefs['user_trigger_event'] === 'activate') {
 		e107::getEvent()->register('user_signup_activated',
-			[UserEvents::class, 'confirmed']);
+			[UserEvents::class, 'activate']);
 	}
 
 	if ($prefs['user_trigger_event'] === 'login') {
