@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e31dc26d306909d6807cd01663ee05b7",
+    "content-hash": "4985827fed90481f5d2d05f30e1373ff",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -145,23 +145,24 @@
         },
         {
             "name": "lasserafn/php-initial-avatar-generator",
-            "version": "2.3.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LasseRafn/php-initial-avatar-generator.git",
-                "reference": "3bef45c60c000e4ea877d9266e123faa5efdd79a"
+                "reference": "55173bac166be6a7f9205979f9dd50f89ff8d4c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LasseRafn/php-initial-avatar-generator/zipball/3bef45c60c000e4ea877d9266e123faa5efdd79a",
-                "reference": "3bef45c60c000e4ea877d9266e123faa5efdd79a",
+                "url": "https://api.github.com/repos/LasseRafn/php-initial-avatar-generator/zipball/55173bac166be6a7f9205979f9dd50f89ff8d4c3",
+                "reference": "55173bac166be6a7f9205979f9dd50f89ff8d4c3",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "intervention/image": "^2.3",
                 "lasserafn/php-initials": "^2.20",
                 "lasserafn/php-string-script-language": "^0.1.0",
-                "php": "^5.6|^7.0|^7.1|^7.2"
+                "php": "^5.6|^7.0|^7.1|^7.2|^7.3"
             },
             "require-dev": {
                 "doctrine/instantiator": "1.0.*",
@@ -190,7 +191,7 @@
                 "avatar",
                 "image"
             ],
-            "time": "2018-01-31T14:48:54+00:00"
+            "time": "2018-09-03T13:09:05+00:00"
         },
         {
             "name": "lasserafn/php-initials",

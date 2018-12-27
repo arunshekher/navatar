@@ -1,6 +1,6 @@
 {
     "require": {
-        "lasserafn/php-initial-avatar-generator": "^2.3"
+        "lasserafn/php-initial-avatar-generator": "3.0.1"
     },
 
     "autoload": {
