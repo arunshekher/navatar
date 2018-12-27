@@ -9,11 +9,11 @@ use Navatar\Plugin\Models\User;
 class Navatar extends Base
 {
 
-	public static function create($data)
+	public static function assign($data)
 	{
 		$controller = static::instantiate();
 
-		return $controller->createNavatar($data);
+		return $controller->assignNavatar($data);
 	}
 
 
@@ -22,12 +22,11 @@ class Navatar extends Base
 	 *
 	 * @return array|bool
 	 */
-	public function createNavatar($data)
+	public function assignNavatar($data)
 	{
 		$userId = (int)$data['user_id'];
 		$fileName = $this->generateFileName($data);
 		$path = $this->getPath($fileName);
-
 
 		if (User::fit($userId) /*&& ! file_exists($path)*/) {
 
@@ -46,6 +45,7 @@ class Navatar extends Base
 
 
 	/**
+	 * Generates Navatar filename
 	 * @param $data
 	 *
 	 * @return string
@@ -61,6 +61,7 @@ class Navatar extends Base
 
 	/**
 	 * Gets Navatar save path.
+	 *
 	 * @param $fileName
 	 *
 	 * @return string
@@ -73,6 +74,7 @@ class Navatar extends Base
 
 	/**
 	 * Generates Navatar image
+	 *
 	 * @param $data
 	 * @param $path
 	 */
@@ -97,20 +99,22 @@ class Navatar extends Base
 		// todo: admin pref. for image quality
 
 		//debug
-		Main::log($userName, 'different-vars-gererateNavatar');
+		Main::log($userName, 'vars-navatar-class-generate-metho');
 
 		/**  */
 		try {
 			$avatar = new InitialAvatar();
 
-			$avatar->name($data['user_name'])->length($characterLength)->fontSize($fontSize)
-				->size($namatarSize)->background($backgroundColor)->color($fontColor)
-				->generate()->save($path, 100);
+			$avatar->$driver()->name($data['user_name'])
+				->length($characterLength)->fontSize($fontSize)
+				->size($namatarSize)->background($backgroundColor)
+				->color($fontColor)->generate()->save($path, 100);
 
 		}
 		catch (\Exception $e) {
 			Main::log($e, 'navatar-generate-error');
-			Main::log($e->getMessage(), 'initial-avatar-generate-error', \e_LOG);
+			Main::log($e->getMessage(), 'initial-avatar-generate-error',
+				\e_LOG);
 		}
 
 
@@ -119,6 +123,7 @@ class Navatar extends Base
 
 	/**
 	 * Gets users real name from user table
+	 *
 	 * @param $userId
 	 *
 	 * @return int
@@ -130,13 +135,15 @@ class Navatar extends Base
 
 
 	/**
-	 * Public static alias for \Navatar\Plugin\Controllers\Navatar::removeImages()
+	 * Public static alias for
+	 * \Navatar\Plugin\Controllers\Navatar::removeImages()
 	 *
 	 * @return array
 	 */
 	public static function removeAll()
 	{
 		$controller = static::instantiate();
+
 		return $controller->removeImages();
 	}
 
@@ -153,10 +160,10 @@ class Navatar extends Base
 
 		foreach (glob(e_AVATAR_UPLOAD . '*_navatar.png') as $filename) {
 
-			if(is_file($filename) && @unlink($filename)){
+			if (is_file($filename) && @unlink($filename)) {
 				// delete success
 				$unlinkStatus['success'][] = $filename;
-			} else if (is_file ($filename)) {
+			} else if (is_file($filename)) {
 				// unlink failed.
 				$unlinkStatus['fail'][] = $filename;
 			} else {
@@ -165,6 +172,7 @@ class Navatar extends Base
 			}
 
 		}
+
 		return $unlinkStatus;
 	}
 

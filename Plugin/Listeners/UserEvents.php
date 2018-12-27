@@ -9,14 +9,14 @@ class UserEvents
 {
 	public function activate($data)
 	{
-		Navatar::create($data);
+		Navatar::assign($data);
 		//Main::log($data, 'activation-trigger');
 	}
 
 
 	public function login($data)
 	{
-		Navatar::create($data);
+		Navatar::assign($data);
 		//Main::log($data,'new-login-trigger');
 	}
 
