@@ -60,6 +60,7 @@ class Navatar extends Base
 
 
 	/**
+	 * Gets Navatar save path.
 	 * @param $fileName
 	 *
 	 * @return string
@@ -71,31 +72,39 @@ class Navatar extends Base
 
 
 	/**
+	 * Generates Navatar image
 	 * @param $data
 	 * @param $path
 	 */
 	public function generateNavatar($data, $path)
 	{
-		// todo: if Navatar with username | real name (Admin Option) call db with user_id
-		//  to get Real Name
-		// todo: Add font color, font variant etc - should it be class properties?
 
-		$namatarSize = ''; // todo: create admin prefernce for namatar size
+
+		if ($this->prefs['initials_source'] === 'realname') {
+			$userName = $this->getRealName($data['user_id']);
+		} else {
+			$userName = $data['user_name'];
+		}
+
+		// todo: Should these vars be class properties than local vars
+		$namatarSize = $this->prefs['navatar_size'];
 		$characterLength = $this->prefs['character_length'];
 		$fontSize = $this->prefs['font_size'];
 		$fontColor = trim($this->prefs['font_color']);
 		$backgroundColor = Color::random();
 		$fontVariant = '/fonts/OpenSans-Semibold.ttf';
-		$driver = '';
+		$driver = $this->prefs['php_graphics_lib'];
+		// todo: admin pref. for image quality
 
-		Main::log($fontSize, 'different-vars-gererateNavatar');
+		//debug
+		Main::log($userName, 'different-vars-gererateNavatar');
 
-		/** @var TYPE_NAME $e */
+		/**  */
 		try {
 			$avatar = new InitialAvatar();
 
-			$avatar->name($data['user_name'])->length($characterLength)->fontSize(0.5)
-				->size(350)->background($backgroundColor)->color($fontColor)
+			$avatar->name($data['user_name'])->length($characterLength)->fontSize($fontSize)
+				->size($namatarSize)->background($backgroundColor)->color($fontColor)
 				->generate()->save($path, 100);
 
 		}
@@ -108,6 +117,23 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Gets users real name from user table
+	 * @param $userId
+	 *
+	 * @return int
+	 */
+	public function getRealName($userId)
+	{
+		return User::realName($userId);
+	}
+
+
+	/**
+	 * Public static alias for \Navatar\Plugin\Controllers\Navatar::removeImages()
+	 *
+	 * @return array
+	 */
 	public static function removeAll()
 	{
 		$controller = static::instantiate();
@@ -118,6 +144,7 @@ class Navatar extends Base
 	/**
 	 * Removes all navatar images (detected with '*_navatar.png' wildcard)
 	 *  under e_AVATAR_UPLOAD path.
+	 *
 	 * @return array
 	 */
 	protected function removeImages()

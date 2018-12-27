@@ -7,10 +7,10 @@ class User
 
 	public static function update($userId, $fileName)
 	{
-		$tp = \e107::getParser();
+		//$tp = \e107::getParser();
 		$sql = \e107::getDb();
 
-		$userId = $tp->toDB($userId);
+		//$userId = $tp->toDB($userId);
 
 		$query =
 			"UPDATE `#user` SET user_image = '-upload-{$fileName}' WHERE user_image = '' AND user_id={$userId}";
@@ -21,10 +21,10 @@ class User
 
 	public static function fit($userId)
 	{
-		$tp = \e107::getParser();
+		//$tp = \e107::getParser();
 		$sql = \e107::getDb();
 
-		$userId = $tp->toDB($userId);
+		//$userId = $tp->toDB($userId);
 
 		return $sql->select('user', 'user_id, user_image',
 			"user_id = {$userId} AND user_image = ''");
@@ -42,5 +42,19 @@ class User
 	{
 		$sql = \e107::getDb();
 		return $sql->count('user', '(*)', "WHERE user_image LIKE '%_navatar.png'");
+	}
+
+
+	public static function realName($userId)
+	{
+		$sql = \e107::getDb();
+
+		$result = $sql->select('user', 'user_login', "user_id = {$userId}");
+
+		if ($result) {
+			$row = $sql->fetch();
+			return $row['user_login'];
+		}
+		return null;
 	}
 }
