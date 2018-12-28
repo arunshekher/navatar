@@ -91,12 +91,12 @@ class Navatar extends Base
 		$characterLength = trim($this->prefs['character_length']);
 		$fontSize = trim($this->prefs['font_size']);
 		$fontColor = trim($this->prefs['font_color']);
-		$backgroundColor = Color::random();
+		$backgroundColor = $this->resolveBgColor();
 		$fontVariant = trim($this->prefs['font_variant']);
 		$driver = trim($this->prefs['php_graphics_lib']);
 		$quality = trim($this->prefs['navatar_quality']);
 
-		Main::log($fontVariant, 'font-variant-test');
+		Main::log($backgroundColor, 'color-via-resolve-method');
 
 		/**  */
 		try {
@@ -128,6 +128,15 @@ class Navatar extends Base
 		}
 
 		return $data['user_name'];
+	}
+
+
+	private function resolveBgColor()
+	{
+		if ($this->prefs['random_bg_color']) {
+			return Color::random();
+		}
+		return array_shift($this->prefs['background_colors']);
 	}
 
 
