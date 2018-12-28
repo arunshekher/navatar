@@ -48,6 +48,15 @@ abstract class Main
 
 
 	/**
+	 * @return array
+	 */
+	public function getPrefs()
+	{
+		return $this->prefs;
+	}
+
+
+	/**
 	 * Writes passed in data to a log file to the 'logs'
 	 *  directory inside plugin directory.
 	 *
