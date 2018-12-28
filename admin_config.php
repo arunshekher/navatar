@@ -5,6 +5,7 @@ if ( ! getperms('P') || ! e107::isInstalled('navatar')) {
 	exit;
 }
 
+use Navatar\Plugin\Controllers\Font;
 use Navatar\Plugin\Controllers\Navatar;
 use Navatar\Plugin\Main;
 use Navatar\Plugin\Models\User;
@@ -100,6 +101,14 @@ class navatar_ui extends e_admin_ui
 				'help'=> 'Navatar Image Size. Default is 48x48 pixels.'
 			],
 
+			'navatar_quality' => [
+				'title'=> 'Image Quality:',
+				'tab'=> 0,
+				'type'=>'text',
+				'data' => 'int',
+				'help'=> 'Quality of generated Navatar image.'
+			],
+
 			'initials_source' => [
 				'title'=> 'Initials source:',
 				'tab'=> 1,
@@ -149,7 +158,7 @@ class navatar_ui extends e_admin_ui
 				'help'=>'The size of font. Default value is: 0.5. If the Image size is 50px and fontSize is 0.5, the font size will be 25px.'
 			],
 
-			'font_variants' => [
+			'font_variants' => [ // todo: change naming to singular form
 				'title'=> 'Font Variants:',
 				'tab'=> 3,
 				'type'=>'dropdown',
@@ -191,6 +200,7 @@ class navatar_ui extends e_admin_ui
 		$this->prefs['user_trigger_event']['writeParms'] = $this->userTrigger;
 		$this->prefs['character_length']['writeParms'] = $this->characterLength;
 		$this->prefs['php_graphics_lib']['writeParms'] = $this->graphicsLibrary;
+		$this->prefs['font_variants']['writeParms'] = Font::index();
 
 	}
 

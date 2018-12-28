@@ -18,12 +18,13 @@
 		<pref name='user_trigger_event'>both</pref>
 		<pref name='job_queue_active'>0</pref>
 		<pref name='navatar_size'>250</pref>
+		<pref name='navatar_quality'>100</pref>
 		<pref name='initials_source'>username</pref>
 		<pref name='php_graphics_lib'>gd</pref>
 		<pref name='character_length'>2</pref>
 		<pref name='font_color'>#ffffff</pref>
 		<pref name='font_size'>0.5</pref>
-		<pref name='font_variants'>/fonts/OpenSans-Semibold.ttf</pref>
+		<pref name='font_variants'>/fonts/NotoSans-Bold.ttf</pref>
 		<pref name='background_colors'>
 #55efc4
 #81ecec

@@ -47,6 +47,7 @@ class Navatar extends Base
 
 	/**
 	 * Generates Navatar filename
+	 *
 	 * @param $data
 	 *
 	 * @return string
@@ -83,59 +84,66 @@ class Navatar extends Base
 	{
 
 
-		if ($this->prefs['initials_source'] === 'realname') {
-			$userName = $this->getRealName($data['user_id']);
-		} else {
-			$userName = $data['user_name'];
-		}
+		$userName = $this->resolveNameSource($data);
 
-		// todo: Should these vars be class properties than local vars
-		$namatarSize = $this->prefs['navatar_size'];
-		$characterLength = $this->prefs['character_length'];
-		$fontSize = $this->prefs['font_size'];
+		// todo: ? should these vars be class properties than local vars
+		$namatarSize = trim($this->prefs['navatar_size']);
+		$characterLength = trim($this->prefs['character_length']);
+		$fontSize = trim($this->prefs['font_size']);
 		$fontColor = trim($this->prefs['font_color']);
 		$backgroundColor = Color::random();
-		$fontVariant = '/fonts/OpenSans-Semibold.ttf';
-		$driver = $this->prefs['php_graphics_lib'];
-		// todo: admin pref. for image quality
+		$fontVariant = trim($this->prefs['font_variants']);
+		$driver = trim($this->prefs['php_graphics_lib']);
+		$quality = trim($this->prefs['navatar_quality']);
 
-
+		//Main::log($fontVariant, 'font-variant-test');
 
 		/**  */
 		try {
 			$avatar = new InitialAvatar();
 
-			//debug
-			Main::log($userName, 'vars-navatar-class-generate-method');
-
-			$avatar->name($userName)
-				->length($characterLength)->fontSize($fontSize)
-				->size($namatarSize)->background($backgroundColor)
-				->color($fontColor)->$driver()->generate()->save($path, 100);
+			$avatar->name($userName)->length($characterLength)
+				->font($fontVariant)->fontSize($fontSize)->size($namatarSize)
+				->background($backgroundColor)->color($fontColor)->$driver()
+				->generate()->save($path, $quality);
 
 		}
 		catch (\Exception $e) {
-			Main::log($e, 'navatar-generate-error');
-			Main::log($e->getMessage(), 'initial-avatar-generate-error',
-				\e_LOG);
+			Main::log($e->getMessage() . ' ' . $e->getTrace(),
+				'initial-avatar-generate-error', \e_LOG);
 		}
-
 
 	}
 
 
 	/**
-	 * Gets users real name from user table
-	 *
-	 * @param $userId
+	 * @param $data
 	 *
 	 * @return int
 	 */
-	public function getRealName($userId)
+	private function resolveNameSource($data)
 	{
-		$name = User::real($userId);
-		if ($name)
-		return User::real($userId);
+		if ($this->prefs['initials_source'] === 'realname') {
+			return $this->getRealName($data);
+		}
+
+		return $data['user_name'];
+	}
+
+
+	/**
+	 * Gets users real name from user table if no
+	 *  realname returns username
+	 *
+	 * @param $data
+	 *
+	 * @return int
+	 */
+	public function getRealName($data)
+	{
+		$name = User::real($data['user_id']);
+
+		return $name ?: $data['user_name'];
 	}
 
 
