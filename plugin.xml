@@ -19,33 +19,49 @@
 		<pref name='job_queue_active'>0</pref>
 		<pref name='navatar_size'>250</pref>
 		<pref name='navatar_quality'>100</pref>
-		<pref name='initials_source'>username</pref>
+		<pref name='initials_source'>realname</pref>
 		<pref name='php_graphics_lib'>gd</pref>
 		<pref name='character_length'>2</pref>
 		<pref name='font_color'>#ffffff</pref>
 		<pref name='font_size'>0.5</pref>
-		<pref name='font_variants'>/fonts/NotoSans-Bold.ttf</pref>
+		<pref name='font_variant'>/fonts/NotoSans-Bold.ttf</pref>
 		<pref name='background_colors'>
-#55efc4
-#81ecec
-#74b9ff
-#a29bfe
-#dfe6e9
-#00b894
-#00cec9
-#0984e3
-#6c5ce7
-#b2bec3
-#ffeaa7
-#fab1a0
-#ff7675
-#fd79a8
-#636e72
-#fdcb6e
-#e17055
-#d63031
-#e84393
-#2d3436
+#575D90
+#587D71
+#646E68
+#A08794
+#754668
+#372549
+#99E1D9
+#DDE0BD
+#D0D1AC
+#B6A39E
+#99B2DD
+#ACE894
+#A8BA9A
+#BBE5ED
+#BFBCCB
+#E26D5C
+#C9CBA3
+#FFE1A8
+#FFE66D
+#343434
+#2F3061
+#6CA6C1
+#847996
+#88B7B5
+#A7CAB1
+#774936
+#FF729F
+#81F4E1
+#C7EBF0
+#DDA448
+#8D6A9F
+#A9B18F
+#CB807D
+#FE64A3
+#F6839C
+#F0B5B3
 		</pref>
 		<pref name='random_bg_color'>1</pref>
 	</pluginPrefs>

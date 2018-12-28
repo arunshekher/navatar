@@ -57,7 +57,7 @@ class navatar_ui extends e_admin_ui
 		
 
 
-		protected $preftabs        = ['General', 'Text', 'Color', 'Font' ];
+		protected $preftabs        = ['General', 'Text', 'Color', 'Font', 'Schedule' ];
 
 		protected $prefs = [
 
@@ -79,7 +79,7 @@ class navatar_ui extends e_admin_ui
 
 			'job_queue_active' => [
 				'title'=> 'Cron Job Queue Active:',
-				'tab'=> 0,
+				'tab'=> 4,
 				'type'=>'boolean',
 				'data' => 'int',
 				'help'=> 'Activate/Deactivate Cron Job Queue.'
@@ -127,7 +127,7 @@ class navatar_ui extends e_admin_ui
 
 
 			'font_color' => [
-				'title'=> 'Font Color:',
+				'title'=> 'Foreground (Font) Color:',
 				'tab'=> 2,
 				'type'=>'text',
 				'data' => 'str',
@@ -135,7 +135,7 @@ class navatar_ui extends e_admin_ui
 			],
 
 			'background_colors' => [
-				'title' => 'Background Color/s:',
+				'title' => 'Background Color(s):',
 				'tab'   => 2,
 				'type'  => 'textarea',
 				'data'  => 'str',
@@ -158,12 +158,12 @@ class navatar_ui extends e_admin_ui
 				'help'=>'The size of font. Default value is: 0.5. If the Image size is 50px and fontSize is 0.5, the font size will be 25px.'
 			],
 
-			'font_variants' => [ // todo: change naming to singular form
+			'font_variant' => [
 				'title'=> 'Font Variants:',
 				'tab'=> 3,
 				'type'=>'dropdown',
 				'data' => 'str',
-				'help'=>'Font variant to use 4 local variants and others offered by GD library, Default is: OpenSans-Regular(local)'
+				'help'=>'Select font variant.'
 			],
 
 
@@ -200,7 +200,7 @@ class navatar_ui extends e_admin_ui
 		$this->prefs['user_trigger_event']['writeParms'] = $this->userTrigger;
 		$this->prefs['character_length']['writeParms'] = $this->characterLength;
 		$this->prefs['php_graphics_lib']['writeParms'] = $this->graphicsLibrary;
-		$this->prefs['font_variants']['writeParms'] = Font::index();
+		$this->prefs['font_variant']['writeParms'] = Font::index();
 
 	}
 
@@ -219,7 +219,7 @@ class navatar_ui extends e_admin_ui
 		$this->tidyupPageProcess();
 
 		$userCount = '<span class="badge badge-light">' .User::count() . '</span>';
-		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => $userCount]);
+		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK, ['count' => $userCount, 'user' => MPREFIX . 'user']);
 		$mes->addInfo(LAN_NAVATAR_TIDY_INFO, 'navatar-mstack');
 		$message = $mes->render('navatar-mstack');
 		$mes->reset('navatar-mstack');
@@ -277,14 +277,6 @@ class navatar_ui extends e_admin_ui
 	}
 
 
-	protected function listFontFiles()
-	{
-		$fonts = glob(__DIR__ . '/vendor/lasserafn/php-initial-avatar-generator/src/fonts/*.ttf');
-		Main::log($fonts, 'font-list');
-//		foreach (glob(__DIR__ . '/vendor/lasserafn/php-initial-avatar-generator/src/fonts/*.ttf') as $font) {
-//			//echo "$filename size " . filesize($filename) . "\n";
-//		}
-	}
 
 
 	public function renderHelp()

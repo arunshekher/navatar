@@ -92,11 +92,11 @@ class Navatar extends Base
 		$fontSize = trim($this->prefs['font_size']);
 		$fontColor = trim($this->prefs['font_color']);
 		$backgroundColor = Color::random();
-		$fontVariant = trim($this->prefs['font_variants']);
+		$fontVariant = trim($this->prefs['font_variant']);
 		$driver = trim($this->prefs['php_graphics_lib']);
 		$quality = trim($this->prefs['navatar_quality']);
 
-		//Main::log($fontVariant, 'font-variant-test');
+		Main::log($fontVariant, 'font-variant-test');
 
 		/**  */
 		try {
