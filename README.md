@@ -21,8 +21,8 @@ Community contributions to Navatar plugin are welcome. Since the project is stil
 * File issues against the bugs you encounter.
 * Submit pull requests to - fix errors, squash bugs, refactor for performance, include language packs
 * Submit feature requests - for added functionality, admin options etc.
-* Express gratitude - scientific studies continually prove that it can make you happier!! :wink: :laughing: ...all of the motivation part set apart. :heart_eyes:
-* Heat up the development arms-race for e107 by writing some compelling code for it yourselves: - biological evolutionary arms-race has produced some of the most resilient organisms in real world. May be it applies equally in the virtual world!
+* Express gratitude - scientific studies continually prove that it can make you happier!! :wink: The motivation it's gonna give me is just a side-effect. :laughing: :heart_eyes:
+* Heat up the development arms-race for e107 by writing some plugins yourselves: - biological evolutionary arms-race has produced some of the most resilient organisms in real world. May be it applies equally in the virtual world!
 
 
 # Release History
