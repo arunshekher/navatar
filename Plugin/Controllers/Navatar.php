@@ -30,8 +30,9 @@ class Navatar extends Base
 
 		if (User::fit($userId) /*&& ! file_exists($path)*/) {
 
-			//clear thumbnail cache
-			\e107::getCache()->clearAll('image');
+			//clear image cache
+			//\e107::getCache()->clearAll('image', '.*(\.cache\.bin)');
+			\e107::getCache()->clearAll('browser');
 
 			// call navatar generation method
 			$this->generateNavatar($data, $path);
@@ -98,17 +99,19 @@ class Navatar extends Base
 		$driver = $this->prefs['php_graphics_lib'];
 		// todo: admin pref. for image quality
 
-		//debug
-		Main::log($userName, 'vars-navatar-class-generate-metho');
+
 
 		/**  */
 		try {
 			$avatar = new InitialAvatar();
 
-			$avatar->$driver()->name($data['user_name'])
+			//debug
+			Main::log($userName, 'vars-navatar-class-generate-method');
+
+			$avatar->name($userName)
 				->length($characterLength)->fontSize($fontSize)
 				->size($namatarSize)->background($backgroundColor)
-				->color($fontColor)->generate()->save($path, 100);
+				->color($fontColor)->$driver()->generate()->save($path, 100);
 
 		}
 		catch (\Exception $e) {
@@ -130,7 +133,9 @@ class Navatar extends Base
 	 */
 	public function getRealName($userId)
 	{
-		return User::realName($userId);
+		$name = User::real($userId);
+		if ($name)
+		return User::real($userId);
 	}
 
 
