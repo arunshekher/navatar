@@ -4,7 +4,7 @@
 Name + Avatar = 'Navatar', connotes 'New Avatar!'
 An e107 CMS plugin that incarnates (generates) user avatar from your initials.
 
-![navatar]()
+![navatar](https://user-images.githubusercontent.com/315195/50542002-542cce80-0bcb-11e9-902e-8a3177fe1aa4.gif)
 
 # Description
 Navatar is a wrapped/encapsulated implementation of the awesome php library by Lasse Rafn named [php-initial-avatar-generator](https://github.com/LasseRafn/php-initial-avatar-generator "php-initial-avatar-generator"). Navatar uses initials from usernames or real names of site users to automatically generate avatar images if they haven't uploaded their own.
