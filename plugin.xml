@@ -11,7 +11,7 @@
 	<category>users</category>
 	<copyright>Arun S. Sekher</copyright>
 	<adminLinks>
-		<link url="admin_config.php" description="" icon="" iconSmall="" icon128="" primary="true" >LAN_CONFIGURE</link>
+		<link url="admin_config.php" description="" icon="images/navatar_32.png" iconSmall="images/navatar_16.png" icon128="images/navatar_128.png" primary="true" >LAN_CONFIGURE</link>
 	</adminLinks>
 	<pluginPrefs>
 		<pref name='master_active'>1</pref>
@@ -26,43 +26,49 @@
 		<pref name='font_size'>0.5</pref>
 		<pref name='font_variant'>/fonts/NotoSans-Bold.ttf</pref>
 		<pref name='background_colors'>
-#575D90
-#587D71
-#646E68
-#A08794
-#754668
-#372549
-#99E1D9
-#DDE0BD
-#D0D1AC
-#B6A39E
-#99B2DD
-#ACE894
-#A8BA9A
-#BBE5ED
-#BFBCCB
-#E26D5C
-#C9CBA3
-#FFE1A8
-#FFE66D
-#343434
-#2F3061
-#6CA6C1
-#847996
-#88B7B5
-#A7CAB1
-#774936
-#FF729F
-#81F4E1
-#C7EBF0
-#DDA448
-#8D6A9F
-#A9B18F
-#CB807D
-#FE64A3
-#F6839C
-#F0B5B3
-		</pref>
+#fe4a49
+#2ab7ca
+#fed766
+#f4b6c2
+#f6abb6
+#03396c
+#005b96
+#6497b1
+#651e3e
+#851e3e
+#dec3c3
+#4a4e4d
+#0e9aa7
+#3da4ab
+#f6cd61
+#fe8a71
+#63ace5
+#2a4d69
+#4b86b4
+#adcbe3
+#fe9c8f
+#feb2a8
+#f9caa7
+#009688
+#ee4035
+#f37736
+#fdf498
+#7bc043
+#0392cf
+#96ceb4
+#ffeead
+#ff6f69
+#ffcc5c
+#88d8b0
+#854442
+#be9b7b
+#3b5998
+#a8e6cf
+#dcedc1
+#ffd3b6
+#ffaaa5
+#ff8b94
+        </pref>
 		<pref name='random_bg_color'>1</pref>
 	</pluginPrefs>
 	<dependencies>
