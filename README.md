@@ -2,7 +2,7 @@
 [![Join the chat at https://gitter.im/navatar-e107/Lobby](https://badges.gitter.im/navatar-e107/Lobby.svg)](https://gitter.im/navatar-e107/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 # Navatar
 Name + Avatar = 'Navatar', connotes 'New Avatar!'
-An e107 CMS plugin that reincarnates (generates) user avatar from your initials.
+An e107 CMS plugin that incarnates (generates) user avatar from your initials.
 
 ![navatar]()
 
