@@ -72,14 +72,6 @@ class navatar_ui extends e_admin_ui
 			'help'  => 'Which user event trigger generation of Navatar.',
 		],
 
-		'job_queue_active' => [
-			'title' => 'Cron Job Queue Active:',
-			'tab'   => 4,
-			'type'  => 'boolean',
-			'data'  => 'int',
-			'help'  => 'Activate/Deactivate Cron Job Queue.',
-		],
-
 		'php_graphics_lib' => [
 			'title' => 'PHP Graphics Library:',
 			'tab'   => 0,
@@ -160,6 +152,14 @@ class navatar_ui extends e_admin_ui
 			'help'  => 'Select font variant.',
 		],
 
+		'job_queue_active' => [
+			'title' => 'Activate/Deactivate Cron Job Queue: (Not Implemented)',
+			'tab'   => 4,
+			'type'  => 'boolean',
+			'data'  => 'int',
+			'help'  => 'Not yet implemented.',
+		],
+
 	];
 
 
@@ -202,8 +202,6 @@ class navatar_ui extends e_admin_ui
 		$frm = e107::getForm();
 		$mes = e107::getMessage();
 
-		//test
-		//$this->listFontFiles();
 
 		$this->tidyupPageProcess();
 
