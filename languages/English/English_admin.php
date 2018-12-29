@@ -7,7 +7,7 @@ define('LAN_NAVATAR_PREF_VAL_REALNAME', 'Real Name');
 define('LAN_NAVATAR_INFO_MENU_TITLE', 'Project Info');
 define('LAN_NAVATAR_INFO_MENU_SUBTITLE', 'Project on GitHub:');
 define('LAN_NAVATAR_INFO_MENU_SUBTITLE_ISSUES', 'Report Issues:');
-define('LAN_NAVATAR_INFO_MENU_ISSUES_TEXT', 'Click the issues button below to report your issues on Github.');
+define('LAN_NAVATAR_INFO_MENU_ISSUES_TEXT', 'You are welcome to report your issues on Github by clicking the issue button below.');
 define('LAN_NAVATAR_INFO_MENU_SUBTITLE_DEV', 'Show your Appreciation!');
 define('LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT', 'If you find the plugin useful, please consider supporting what I do.');
 define('LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT_SIGN', 'However, if it breaks something please don\'t blame me! &mdash; Arun');
