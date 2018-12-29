@@ -208,7 +208,7 @@ class navatar_ui extends e_admin_ui
 		$this->tidyupPageProcess();
 
 		$userCount =
-			'<span class="badge badge-light">' . User::count() . '</span>';
+			'<span class="badge badge-warning">' . User::count() . '</span>';
 		$confirmText = $tp->lanVars(LAN_NAVATAR_TIDY_CONFIRM_ROLLBACK,
 			['count' => $userCount, 'user' => MPREFIX . 'user']);
 		$mes->addInfo(LAN_NAVATAR_TIDY_INFO, 'navatar-mstack');
