@@ -131,6 +131,11 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Resolves background color based on admin preference
+	 *
+	 * @return mixed|string
+	 */
 	private function resolveBgColor()
 	{
 		if ($this->prefs['random_bg_color']) {
@@ -156,46 +161,5 @@ class Navatar extends Base
 	}
 
 
-	/**
-	 * Public static alias for
-	 * \Navatar\Plugin\Controllers\Navatar::removeImages()
-	 *
-	 * @return array
-	 */
-	public static function removeAll()
-	{
-		$controller = static::instantiate();
-
-		return $controller->removeImages();
-	}
-
-
-	/**
-	 * Removes all navatar images (detected with '*_navatar.png' wildcard)
-	 *  under e_AVATAR_UPLOAD path.
-	 *
-	 * @return array
-	 */
-	protected function removeImages()
-	{
-		$unlinkStatus = [];
-
-		foreach (glob(e_AVATAR_UPLOAD . '*_navatar.png') as $filename) {
-
-			if (is_file($filename) && @unlink($filename)) {
-				// delete success
-				$unlinkStatus['success'][] = $filename;
-			} else if (is_file($filename)) {
-				// unlink failed.
-				$unlinkStatus['fail'][] = $filename;
-			} else {
-				// file doesn't exist
-				$unlinkStatus['desist'][] = $filename;
-			}
-
-		}
-
-		return $unlinkStatus;
-	}
 
 }
