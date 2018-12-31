@@ -15,15 +15,15 @@ Navatar is a wrapped/encapsulated implementation of the awesome php library by L
 * GD Library (>=2.0) or Imagick PHP extension (>=6.5.7)
 
 # Installing Dependencies
-If you are downloading this plugin directly via the e107 Plugin Manager (when its approved) in the admin area or from the e107.org official website plugin size limitations there does not allow to include all dependencies with the plugin package. You'll have to acquire these dependencies manually using the dependency manager named composer.
+If you are downloading this plugin directly via the e107 plugin manager in the admin area or from the e107.org official website's plugin download area (as and when the plugin gets approved) you do not have all the dependencies required for the plugin to work in the package you get, this is due to the plugin upload size limitations there. You'll have to acquire these dependencies manually using a php dependency manager called composer.
 
-To install the dependencies defined for this plugin in composer.json, you need to run the following command after installing composer:
+To install the dependencies defined for this plugin in its composer.json, you need to run the following command in the plugin directory after installing composer:
 
 `composer install`
 
-If your webserver does not allow running commands in a secure shell session, you may acquire these dependencies locally by installing composer in your local machine pulling the dependencies and then FTP-ing it to your hosting space.
+If your webserver does not allow running commands in a secure shell session, you may acquire these dependencies locally by installing composer in your local machine pulling the dependencies and then FTP-ing it to your hosting space or you may download the plugin package with all dependencies from this github repository.
 
-Please read this guideline to install it for your OS if you don't have it already - https://getcomposer.org/doc/00-intro.md
+Please read this guideline to install composer for your OS if you don't have it already - https://getcomposer.org/doc/00-intro.md
 
 # Contributions
 Community contributions to Navatar plugin are welcome. Since the project is still in its infancy there are specific priorities for development right now. Please take a look at project [roadmap](https://github.com/arunshekher/navatar/projects/1 "Navatar Roadmap") before contributing via issues and pull requests.
