@@ -9,7 +9,7 @@ class File extends Base
 	 *
 	 * @param mixed $mask
 	 *
-	 * @return array
+	 * @return mixed
 	 */
 	public static function remove($mask)
 	{
@@ -19,7 +19,11 @@ class File extends Base
 			return $controller->removeAll();
 		}
 
-		return $controller->removeGiven($mask);
+		if (is_int($mask)) {
+			return $controller->removeById($mask);
+		}
+
+		return false;
 	}
 
 
@@ -60,7 +64,7 @@ class File extends Base
 	 *
 	 * @return mixed
 	 */
-	protected function removeGiven($userId)
+	protected function removeById($userId)
 	{
 		$tp = \e107::getParser();
 		$path = e_AVATAR_UPLOAD;
