@@ -17,33 +17,22 @@ namespace Navatar\Plugin\Controllers;
 
 use Navatar\Plugin\Main;
 
-class Base extends Main
+abstract class Base extends Main
 {
 
-	/**
-	 * @var instances[] The reference to *Singleton* instances of any child class.
-	 */
-	private static $instances = [];
+	protected $userId;
+	protected $userName;
+	protected $bgColor;
+	protected $charLength;
+	protected $fontVariant;
+	protected $fontColor;
+	protected $fontSize;
+	protected $driver;
+	protected $imageSize;
+	protected $imageQuality;
 
-
-
-	/**
-	 * Returns the *Singleton* instance of the called class.
-	 *
-	 * @return static The *Singleton* instance.
-	 */
-	protected static function instantiate()
-	{
-		if ( ! isset( self::$instances[static::class] ) ) {
-
-			self::$instances[static::class] = new static();
-
-		}
-
-		return self::$instances[static::class];
-	}
-
-
+	protected $fileName;
+	protected $savePath;
 
 
 

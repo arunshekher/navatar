@@ -5,11 +5,17 @@ namespace Navatar\Plugin;
 abstract class Main
 {
 	/**
+	 * @var instances[] The reference to *Singleton* instances of any child
+	 *     class.
+	 */
+	protected static $instances = [];
+	/**
 	 * Navatar preferences
 	 *
 	 * @var array
 	 */
 	protected $prefs;
+
 
 
 	/**
@@ -25,37 +31,43 @@ abstract class Main
 
 	protected function init($prefs)
 	{
-		$colorsArray = $this->delimitedStringToArray($prefs['background_colors']);
+		$colorsArray =
+			$this->delimitedStringToArray($prefs['background_colors']);
 		unset($prefs['background_colors']);
 		$prefs['background_colors'] = $colorsArray;
 
 		$this->setPrefs($prefs);
-		//debug
-		//Main::log($this->prefs, 'main-class-prefs');
 	}
 
+
 	/**
-	 * @param array $prefs
+	 * Returns the *Singleton* instance of the called class.
 	 *
-	 * @return Main
+	 * @return static The *Singleton* instance.
 	 */
-	public function setPrefs($prefs)
+	protected static function instantiate()
 	{
-		$this->prefs = $prefs;
+		if ( ! isset(self::$instances[static::class])) {
 
-		return $this;
+			self::$instances[static::class] = new static();
+
+		}
+
+		return self::$instances[static::class];
 	}
 
 
 	/**
-	 * @return array
+	 * Converts unprintable character delimited string to numeric array
+	 *
+	 * @param $inputString
+	 *
+	 * @return array[]|false|string[]
 	 */
-	public function getPrefs()
+	protected function delimitedStringToArray($inputString)
 	{
-		return $this->prefs;
+		return preg_split("/[\s]+/", $inputString);
 	}
-
-
 	/**
 	 * Writes passed in data to a log file to the 'logs'
 	 *  directory inside plugin directory.
@@ -69,6 +81,7 @@ abstract class Main
 	public static function log(
 		$content, $logName = 'navatar-log', $location = \e_PLUGIN
 	) {
+		$date = date('l jS \of F Y h:i:s A');
 		if ($location === \e_PLUGIN) {
 			$path = $location . 'navatar/logs/';
 		} else {
@@ -83,20 +96,32 @@ abstract class Main
 			$content = var_export($content, true);
 		}
 
-		file_put_contents($path . $logName . '.log', $content . PHP_EOL,
+		file_put_contents($path . $logName . '.log',
+			' --- ' . $date . ' --- ' . PHP_EOL . $content . PHP_EOL,
 			FILE_APPEND);
 	}
 
 
+
+
 	/**
-	 * Converts unprintable character delimited string to numeric array
-	 *
-	 * @param $inputString
-	 *
-	 * @return array[]|false|string[]
+	 * @return array
 	 */
-	protected function delimitedStringToArray($inputString)
+	public function getPrefs()
 	{
-		return preg_split("/[\s]+/", $inputString);
+		return $this->prefs;
+	}
+
+
+	/**
+	 * @param array $prefs
+	 *
+	 * @return Main
+	 */
+	public function setPrefs($prefs)
+	{
+		$this->prefs = $prefs;
+
+		return $this;
 	}
 }
