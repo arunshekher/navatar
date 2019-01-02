@@ -31,6 +31,7 @@ abstract class Base extends Main
 	protected $imageSize;
 	protected $imageQuality;
 
+	protected $initialSource;
 	protected $fileName;
 	protected $savePath;
 

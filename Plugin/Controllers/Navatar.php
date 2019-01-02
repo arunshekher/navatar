@@ -34,16 +34,10 @@ class Navatar extends Base
 	 */
 	public function assignNavatar($data)
 	{
-		// todo: call setUserData() setAdminPrefs() - use encapsulation better
-
 		$this->initializeNavatar($data);
-		//$this->setFileName();
 
 		// debug
 		Main::log(self::$instances, 'instances-from-assign-navatar');
-
-//		$fileName = $this->generateFileName($data);
-//		$path = $this->getPath($fileName);
 
 		if (User::fit($this->userId) /*&& ! file_exists($path)*/) {
 
@@ -66,13 +60,15 @@ class Navatar extends Base
 	{
 		$this->setUserId($data['user_id'])->setUserName($data['user_name'])
 			->setFileName($this->generateFileName($this->userId))
+			->setInitialSource($this->resolveInitialsSource())
 			->setCharLength($this->prefs['character_length'])
 			->setFontSize($this->prefs['font_size'])
 			->setFontColor($this->prefs['font_color'])
 			->setFontVariant($this->prefs['font_variant'])
-			->setBackgroundColor($this->resolveBgColor())
+			->setBackgroundColor($this->determineBgColor())
 			->setDriver($this->prefs['php_graphics_lib'])
 			->setImageSize($this->prefs['navatar_size'])
+			->setSavePath($this->conjureSavePath())
 			->setImageQuality($this->prefs['navatar_quality']);
 	}
 
@@ -141,6 +137,14 @@ class Navatar extends Base
 	}
 
 
+	private function setInitialSource($initialSource)
+	{
+		$this->initialSource = $initialSource;
+
+		return $this;
+	}
+
+
 	private function setFileName($fileName)
 	{
 		$this->fileName = $fileName;
@@ -165,6 +169,13 @@ class Navatar extends Base
 	}
 
 
+	private function setSavePath($savePath)
+	{
+		$this->savePath = $savePath;
+		return $this;
+	}
+
+
 	/**
 	 * Generates Navatar filename
 	 *
@@ -178,54 +189,6 @@ class Navatar extends Base
 				->leadingZeros($userId, 7) . '_navatar.png';
 
 		return $fileName;
-	}
-
-
-	/**
-	 * Resolves background color based on admin preference
-	 *
-	 * @return mixed|string
-	 */
-	private function resolveBgColor()
-	{
-		if ($this->prefs['random_bg_color']) {
-			return Color::random();
-		}
-
-		return array_shift($this->prefs['background_colors']);
-	}
-
-
-	/**
-	 * Generates Navatar image
-	 *
-	 * @param $data
-	 * @param $path
-	 */
-	public function generateNavatar()
-	{
-
-
-		$userName = $this->resolveInitialsSource();
-
-		$savePath = $this->getPath($this->fileName);
-
-		/**  */
-		try {
-			$avatar = new InitialAvatar();
-
-			$avatar->name($userName)->length($this->charLength)
-				->font($this->fontVariant)->fontSize($this->fontSize)
-				->size($this->imageSize)->background($this->bgColor)
-				->color($this->fontColor)->{$this->driver}()->generate()
-				->save($savePath, $this->imageQuality);
-
-		}
-		catch (\Exception $e) {
-			Main::log($e->getMessage() . ' ' . $e->getTrace(),
-				'initial-avatar-generate-error', \e_LOG);
-		}
-
 	}
 
 
@@ -245,8 +208,8 @@ class Navatar extends Base
 
 
 	/**
-	 * Gets users real name from user table if no
-	 *  realname returns username
+	 * Gets user's Real Name (user_login) from database user table; if fails to
+	 * return user_login returns user_name
 	 *
 	 * @param $userId
 	 *
@@ -261,15 +224,58 @@ class Navatar extends Base
 
 
 	/**
-	 * Gets Navatar save path.
+	 * Resolves background color based on admin preference
+	 *
+	 * @return mixed|string
+	 */
+	private function determineBgColor()
+	{
+		if ($this->prefs['random_bg_color']) {
+			return Color::random();
+		}
+
+		return array_shift($this->prefs['background_colors']);
+	}
+
+
+	/**
+	 * Generates Navatar image
+	 *
+	 * @param $data
+	 * @param $path
+	 */
+	public function generateNavatar()
+	{
+
+		/**  */
+		try {
+			$avatar = new InitialAvatar();
+
+			$avatar->name($this->initialSource)->length($this->charLength)
+				->font($this->fontVariant)->fontSize($this->fontSize)
+				->size($this->imageSize)->background($this->bgColor)
+				->color($this->fontColor)->{$this->driver}()->generate()
+				->save($this->savePath, $this->imageQuality);
+
+		}
+		catch (\Exception $e) {
+			Main::log($e, 'initial-avatar-generate-error', \e_LOG);
+			// todo: on failure e-mail admin & write to admin log
+		}
+
+	}
+
+
+	/**
+	 * Returns navatar save path.
 	 *
 	 * @param $fileName
 	 *
 	 * @return string
 	 */
-	public function getPath($fileName)
+	public function conjureSavePath()
 	{
-		return e_AVATAR_UPLOAD . $fileName;
+		return e_AVATAR_UPLOAD . $this->fileName;
 	}
 
 
