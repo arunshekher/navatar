@@ -56,11 +56,16 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Initializes Navatar\Plugin\Controllers\Navatar object
+	 *
+	 * @param $data
+	 */
 	protected function initializeNavatar($data)
 	{
 		$this->setUserId($data['user_id'])->setUserName($data['user_name'])
 			->setFileName($this->generateFileName($this->userId))
-			->setInitialSource($this->resolveInitialsSource())
+			->setInitialText($this->resolveInitialsSource())
 			->setCharLength($this->prefs['character_length'])
 			->setFontSize($this->prefs['font_size'])
 			->setFontColor($this->prefs['font_color'])
@@ -137,9 +142,9 @@ class Navatar extends Base
 	}
 
 
-	private function setInitialSource($initialSource)
+	private function setInitialText($initialText)
 	{
-		$this->initialSource = $initialSource;
+		$this->initialText = $initialText;
 
 		return $this;
 	}
@@ -251,7 +256,7 @@ class Navatar extends Base
 		try {
 			$avatar = new InitialAvatar();
 
-			$avatar->name($this->initialSource)->length($this->charLength)
+			$avatar->name($this->initialText)->length($this->charLength)
 				->font($this->fontVariant)->fontSize($this->fontSize)
 				->size($this->imageSize)->background($this->bgColor)
 				->color($this->fontColor)->{$this->driver}()->generate()
