@@ -27,8 +27,8 @@ $PROJECT_MENU_TEMPLATE = '
 	</li>
 	<li>&nbsp;</li>
 	<li class="text-center">
-		<a class="github-button" href="https://github.com/arunshekher/mentions/subscription" data-icon="octicon-eye" aria-label="Watch arunshekher/mentions on GitHub">Watch</a>
-		<a class="github-button" href="https://github.com/arunshekher/mentions" data-icon="octicon-star" aria-label="Star arunshekher/mentions on GitHub">Star</a>
+		<a class="github-button" href="https://github.com/arunshekher/navatar/subscription" data-icon="octicon-eye" aria-label="Watch arunshekher/navatar on GitHub">Watch</a>
+		<a class="github-button" href="https://github.com/arunshekher/navatar" data-icon="octicon-star" aria-label="Star arunshekher/navatar on GitHub">Star</a>
 	</li>
 	<li>
 		<h5>' . LAN_NAVATAR_INFO_MENU_SUBTITLE_ISSUES . '</h5>
