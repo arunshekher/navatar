@@ -8,7 +8,7 @@ class Color extends Base
 {
 
 	/**
-	 * Public static alias for randomColor()
+	 * Public static alias for Navatar\Plugin\Controllers\Color::randomColor()
 	 *
 	 * @return string
 	 */
@@ -22,7 +22,7 @@ class Color extends Base
 
 
 	/**
-	 * Returns a random color hex value from an array of values
+	 * Returns a random color hex value from a numeric array of values
 	 *
 	 * @return string
 	 *  A random hex color value
