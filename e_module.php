@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
 
 use Navatar\Plugin\Listeners\UserEvents;
 
@@ -7,22 +6,31 @@ if ( ! defined('e107_INIT')) {
 	exit;
 }
 
-$prefs = e107::getPlugPref('navatar');
+if ( ! file_exists(__DIR__ . '/vendor/autoload.php')) {
 
-if ($prefs['master_active']) {
+	define('NAVATAR_NO_DEPENDENCIES', true);
 
-	if ($prefs['user_trigger_event'] === 'both') {
-		e107::getEvent()->register('user_signup_activated',
-			[UserEvents::class, 'activate']);
-		e107::getEvent()->register('login', [UserEvents::class, 'login']);
-	}
+} else {
 
-	if ($prefs['user_trigger_event'] === 'activate') {
-		e107::getEvent()->register('user_signup_activated',
-			[UserEvents::class, 'activate']);
-	}
+	require_once __DIR__ . '/vendor/autoload.php';
 
-	if ($prefs['user_trigger_event'] === 'login') {
-		e107::getEvent()->register('login', [UserEvents::class, 'login']);
+	$prefs = e107::getPlugPref('navatar');
+
+	if ($prefs['master_active']) {
+
+		if ($prefs['user_trigger_event'] === 'both') {
+			e107::getEvent()->register('user_signup_activated',
+				[UserEvents::class, 'activate']);
+			e107::getEvent()->register('login', [UserEvents::class, 'login']);
+		}
+
+		if ($prefs['user_trigger_event'] === 'activate') {
+			e107::getEvent()->register('user_signup_activated',
+				[UserEvents::class, 'activate']);
+		}
+
+		if ($prefs['user_trigger_event'] === 'login') {
+			e107::getEvent()->register('login', [UserEvents::class, 'login']);
+		}
 	}
 }

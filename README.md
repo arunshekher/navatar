@@ -17,7 +17,7 @@ Navatar is a wrapped/encapsulated implementation of the awesome php library by L
 # Installing Dependencies
 When downloading this plugin directly via the e107 plugin manager in the admin area or from the [e107.org](https://e107.org/) official website the package lacks dependencies required for the plugin to work, this is due to upload size limitation at e107.org. You'll have to fetch these dependencies using [composer](https://getcomposer.org/) or download the whole package from [plugin repository here in Github](https://github.com/arunshekher/navatar "Navatar Repository").  
 
-To install the dependencies defined in composer.json file using composer run the following command in the plugin directory:  
+To install the dependencies using composer run the following command in the plugin directory:  
 
 `composer install`  
 

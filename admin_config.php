@@ -6,8 +6,6 @@ if ( ! getperms('P') || ! e107::isInstalled('navatar')) {
 }
 
 use Navatar\Plugin\Controllers\Font;
-use Navatar\Plugin\Controllers\Navatar;
-use Navatar\Plugin\Main;
 use Navatar\Plugin\Models\User;
 use Navatar\Plugin\Controllers\File;
 
@@ -125,7 +123,7 @@ class navatar_ui extends e_admin_ui
 			'tab'   => 2,
 			'type'  => 'textarea',
 			'data'  => 'str',
-			'help'  => 'Background colors in hex format each color in new line or separated with pipe (|) sign.',
+			'help'  => 'Background colors in hex format each color in new line or separated with space or tab.',
 		],
 
 		'random_bg_color' => [
@@ -187,6 +185,22 @@ class navatar_ui extends e_admin_ui
 
 	public function init()
 	{
+
+		if (defined('NAVATAR_NO_DEPENDENCIES')) {
+			$message = e107::getMessage();
+			$tp = e107::getParser();
+			$warnMessageLink = $tp->lanVars(LAN_NAVATAR_NO_DEP_WARNING_3, [
+				'readme'  => '<a href="README.md">README.md</a>',
+				'package' => '<a href="https://github.com/arunshekher/navatar/archive/master.zip">
+									https://github.com/arunshekher/navatar/archive/master.zip
+								</a>',
+			]);
+			$warning =
+				'<h4>' . LAN_NAVATAR_NO_DEP_WARNING_1 . '</h4><br>' . LAN_NAVATAR_NO_DEP_WARNING_2 . '<br>' . $warnMessageLink;
+
+			return $message->addWarning($warning, 'default');
+		}
+
 		$this->prefs['initials_source']['writeParms'] = $this->intialsSource;
 		$this->prefs['user_trigger_event']['writeParms'] = $this->userTrigger;
 		$this->prefs['character_length']['writeParms'] = $this->characterLength;
@@ -201,7 +215,6 @@ class navatar_ui extends e_admin_ui
 		$tp = e107::getParser();
 		$frm = e107::getForm();
 		$mes = e107::getMessage();
-
 
 		$this->tidyupPageProcess();
 
@@ -271,9 +284,9 @@ class navatar_ui extends e_admin_ui
 	{
 		$template = e107::getTemplate('navatar', 'project_menu');
 		$text = e107::getParser()->parseTemplate($template, true, [
-				'DEV_SUPPORT' => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT,
-				'SIGN'        => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT_SIGN,
-			]);
+			'DEV_SUPPORT' => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT,
+			'SIGN'        => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT_SIGN,
+		]);
 
 		return [
 			'caption' => LAN_NAVATAR_INFO_MENU_TITLE,

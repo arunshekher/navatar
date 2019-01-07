@@ -20,3 +20,6 @@ define('LAN_NAVATAR_TIDY_MES_SUC_RECORDS_REMOVED', 'Database Record(s) removed s
 define('LAN_NAVATAR_TIDY_MES_ERR_NO_RECORDS', 'Nothing to rollback.');
 define('LAN_NAVATAR_TIDY_MES_WARN_FAIL_DELETE', 'The file(s) [files] failed deletion.');
 
+define('LAN_NAVATAR_NO_DEP_WARNING_1', 'Dependencies Not Installed!');
+define('LAN_NAVATAR_NO_DEP_WARNING_2', 'Plugin downloaded via plugin manager or from https://e107.org/plugins does not include the main php library and other dependencies in the package (due to upload size limit). You\'ll have to fetch these dependencies with composer or download the plugin package as whole from its Github repository.');
+define('LAN_NAVATAR_NO_DEP_WARNING_3', 'Read the [readme] for instructions to fetch dependencies using composer. Instead you may download the whole package from this link - [package]');
