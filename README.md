@@ -35,4 +35,5 @@ Community contributions to Navatar plugin are welcome. Since the project is stil
 
 
 # Release History
++ Jan 08, 2019 [v1.1.0-rc.1](https://github.com/arunshekher/navatar/releases/tag/v1.1.0-rc.1) - release candidate 1
 + Dec 30, 2018 [v1.0.4-beta.3](https://github.com/arunshekher/navatar/releases/tag/v1.0.4-beta.3) - beta release
