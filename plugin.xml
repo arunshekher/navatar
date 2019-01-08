@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Navatar" lan="" version="1.0.4" date="2018-12-24" compatibility="2.0" installRequired="true" >
+<e107Plugin name="Navatar" lan="" version="1.1.0" date="2018-12-24" compatibility="2.0" installRequired="true" >
 	<author name="Arun S. Sekher" url="https://github.com/arunshekher" />
 	<summary lan="">A plugin that generates user avatar that has your initials.</summary>
 	<description lan="">A Plugin that uses initials from your username or real name to create avatar images for users if they haven't uploaded their own avatar images.</description>
