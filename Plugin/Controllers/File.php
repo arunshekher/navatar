@@ -5,7 +5,8 @@ namespace Navatar\Plugin\Controllers;
 class File extends Base
 {
 	/**
-	 * Public static alias for all non-static remove methods
+	 * Public static alias for both non-static remove methods
+	 *  in Navatar\Plugin\Controllers\File
 	 *
 	 * @param mixed $mask
 	 *
@@ -28,12 +29,12 @@ class File extends Base
 
 
 	/**
-	 * Removes all navatar images (detected with '*_navatar.png' wildcard)
+	 * Removes all navatar images ('glob'ed with '*_navatar.png' wildcard)
 	 *  under e_AVATAR_UPLOAD path.
 	 *
 	 * @return array
 	 */
-	protected function removeAll()
+	private function removeAll()
 	{
 		$unlinkStatus = [];
 		$files = glob(e_AVATAR_UPLOAD . '*_navatar.png');
@@ -58,13 +59,13 @@ class File extends Base
 
 
 	/**
-	 * Removes given file
+	 * Removes given navatar file under e_AVATAR_UPLOAD path
 	 *
 	 * @param int $userId
 	 *
 	 * @return mixed
 	 */
-	protected function removeById($userId)
+	private function removeById($userId)
 	{
 		$tp = \e107::getParser();
 		$path = e_AVATAR_UPLOAD;

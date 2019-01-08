@@ -5,7 +5,7 @@ namespace Navatar\Plugin;
 abstract class Main
 {
 	/**
-	 * @var instances[] The reference to *Singleton* instances of any child
+	 * @var instances[] reference to *Singleton* instances of any child
 	 *     class.
 	 */
 	protected static $instances = [];
@@ -17,11 +17,9 @@ abstract class Main
 	protected $prefs;
 
 
-
 	/**
 	 * Main constructor.
 	 *
-	 * @param $prefs
 	 */
 	public function __construct()
 	{
@@ -29,6 +27,11 @@ abstract class Main
 	}
 
 
+	/**
+	 * Initializes Navatar\Plugin\Main class
+	 *
+	 * @param $prefs
+	 */
 	protected function init($prefs)
 	{
 		$colorsArray =
@@ -68,9 +71,10 @@ abstract class Main
 	{
 		return preg_split("/[\s]+/", $inputString);
 	}
+
+
 	/**
-	 * Writes passed in data to a log file to the 'logs'
-	 *  directory inside plugin directory.
+	 * Writes passed in data to a log file
 	 *
 	 * @param mixed  $content
 	 *  The data to be logged.
@@ -102,9 +106,9 @@ abstract class Main
 	}
 
 
-
-
 	/**
+	 * Gets preference
+	 *
 	 * @return array
 	 */
 	public function getPrefs()
@@ -114,11 +118,13 @@ abstract class Main
 
 
 	/**
+	 * Sets preference
+	 *
 	 * @param array $prefs
 	 *
-	 * @return Main
+	 * @return \Navatar\Plugin\Main
 	 */
-	public function setPrefs($prefs)
+	protected function setPrefs($prefs)
 	{
 		$this->prefs = $prefs;
 

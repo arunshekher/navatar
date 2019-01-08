@@ -2,7 +2,6 @@
 
 namespace Navatar\Plugin\Controllers;
 
-use Navatar\Plugin\Main;
 
 class Color extends Base
 {

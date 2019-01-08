@@ -78,6 +78,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current image quality - based on admin prefs
+	 *
+	 * @param $imageQuality
+	 *
+	 * @return $this
+	 */
 	private function setImageQuality($imageQuality)
 	{
 		$this->imageQuality = $imageQuality;
@@ -86,6 +93,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current image size - - based on admin prefs
+	 *
+	 * @param $imageSize
+	 *
+	 * @return $this
+	 */
 	private function setImageSize($imageSize)
 	{
 		$this->imageSize = $imageSize;
@@ -94,6 +108,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current php image driver - based on admin prefs
+	 *
+	 * @param $driver
+	 *
+	 * @return $this
+	 */
 	private function setDriver($driver)
 	{
 		$this->driver = $driver;
@@ -102,6 +123,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current background color - based on admin prefs
+	 *
+	 * @param $bgColor
+	 *
+	 * @return $this
+	 */
 	private function setBackgroundColor($bgColor)
 	{
 		$this->bgColor = $bgColor;
@@ -110,6 +138,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current font variant - based on admin prefs
+	 *
+	 * @param $fontVariant
+	 *
+	 * @return $this
+	 */
 	private function setFontVariant($fontVariant)
 	{
 		$this->fontVariant = $fontVariant;
@@ -118,6 +153,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current font color - based on admin prefs
+	 *
+	 * @param $fontColor
+	 *
+	 * @return $this
+	 */
 	private function setFontColor($fontColor)
 	{
 		$this->fontColor = $fontColor;
@@ -126,6 +168,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current font size - based on admin prefs
+	 *
+	 * @param $fontSize
+	 *
+	 * @return $this
+	 */
 	private function setFontSize($fontSize)
 	{
 		$this->fontSize = $fontSize;
@@ -134,6 +183,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current character length - based on admin prefs
+	 *
+	 * @param $charLength
+	 *
+	 * @return $this
+	 */
 	protected function setCharLength($charLength)
 	{
 		$this->charLength = $charLength;
@@ -142,6 +198,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current user's initial text
+	 *
+	 * @param $initialText
+	 *
+	 * @return $this
+	 */
 	private function setInitialText($initialText)
 	{
 		$this->initialText = $initialText;
@@ -150,6 +213,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current user's navatar filename
+	 *
+	 * @param $fileName
+	 *
+	 * @return $this
+	 */
 	private function setFileName($fileName)
 	{
 		$this->fileName = $fileName;
@@ -158,6 +228,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current user_name
+	 *
+	 * @param $userName
+	 *
+	 * @return $this
+	 */
 	protected function setUserName($userName)
 	{
 		$this->userName = $userName;
@@ -166,6 +243,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current user_id
+	 *
+	 * @param $userId
+	 *
+	 * @return $this
+	 */
 	protected function setUserId($userId)
 	{
 		$this->userId = $userId;
@@ -174,6 +258,13 @@ class Navatar extends Base
 	}
 
 
+	/**
+	 * Sets current save path
+	 *
+	 * @param $savePath
+	 *
+	 * @return $this
+	 */
 	private function setSavePath($savePath)
 	{
 		$this->savePath = $savePath;
@@ -198,6 +289,8 @@ class Navatar extends Base
 
 
 	/**
+	 * Determines current initials' text source - based on admin prefs
+	 *
 	 * @param $data
 	 *
 	 * @return int
