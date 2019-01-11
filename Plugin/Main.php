@@ -61,7 +61,7 @@ abstract class Main
 
 
 	/**
-	 * Converts unprintable character delimited string to numeric array
+	 * Converts non-printing character delimited string to numeric array
 	 *
 	 * @param $inputString
 	 *
