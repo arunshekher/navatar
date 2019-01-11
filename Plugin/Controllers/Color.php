@@ -13,8 +13,8 @@ class Color extends Base
 	 */
 	public static function random()
 	{
-		$controller = static::instantiate();
-		return $controller->randomColor();
+		$color = static::instantiate();
+		return $color->randomColor();
 	}
 
 

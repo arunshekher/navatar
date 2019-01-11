@@ -19,9 +19,9 @@ class Navatar extends Base
 	 */
 	public static function assign($data)
 	{
-		$controller = static::instantiate();
+		$navatar = static::instantiate();
 
-		return $controller->assignNavatar($data);
+		return $navatar->assignNavatar($data);
 	}
 
 

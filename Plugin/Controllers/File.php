@@ -14,14 +14,14 @@ class File extends Base
 	 */
 	public static function remove($mask)
 	{
-		$controller = static::instantiate();
+		$file = static::instantiate();
 
 		if ($mask === '*') {
-			return $controller->removeAll();
+			return $file->removeAll();
 		}
 
 		if (is_int($mask)) {
-			return $controller->removeById($mask);
+			return $file->removeById($mask);
 		}
 
 		return false;
