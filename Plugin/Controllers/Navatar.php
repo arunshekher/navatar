@@ -37,7 +37,7 @@ class Navatar extends Base
 		$this->initializeNavatar($data);
 
 		// debug
-		Main::log(self::$instances, 'instances-from-assign-navatar');
+		//Main::log(self::$instances, 'instances-from-assign-navatar');
 
 		if (User::fit($this->userId) /*&& ! file_exists($path)*/) {
 
