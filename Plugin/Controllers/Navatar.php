@@ -332,7 +332,7 @@ class Navatar extends Base
 			return Color::random();
 		}
 
-		return array_shift($this->prefs['background_colors']);
+		return Color::exact();
 	}
 
 
