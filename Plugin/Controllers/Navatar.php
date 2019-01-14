@@ -3,7 +3,6 @@
 namespace Navatar\Plugin\Controllers;
 
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
-use Navatar\Plugin\Main;
 use Navatar\Plugin\Models\User;
 
 class Navatar extends Base
@@ -30,14 +29,11 @@ class Navatar extends Base
 	 *
 	 * @param $data
 	 *
-	 * @return array|bool
+	 * @return bool
 	 */
 	public function assignNavatar($data)
 	{
-		$this->initializeNavatar($data);
-
-		// debug
-		//Main::log(self::$instances, 'instances-from-assign-navatar');
+		$this->initializeData($data);
 
 		if (User::fit($this->userId) /*&& ! file_exists($path)*/) {
 
@@ -45,11 +41,12 @@ class Navatar extends Base
 			//\e107::getCache()->clearAll('image', '.*(\.cache\.bin)');
 			\e107::getCache()->clearAll('browser');
 
-			// call navatar generation method
-			$this->generateNavatar();
+			/** generate navatar & update user db record **/
+			if ($this->generateNavatar()) {
+				// database update
+				return User::update($this->userId, $this->fileName);
+			}
 
-			// database update
-			return User::update($this->userId, $this->fileName);
 		}
 
 		return false;
@@ -61,7 +58,7 @@ class Navatar extends Base
 	 *
 	 * @param $data
 	 */
-	protected function initializeNavatar($data)
+	protected function initializeData($data)
 	{
 		$this->setUserId($data['user_id'])->setUserName($data['user_name'])
 			->setFileName($this->generateFileName($this->userId))
@@ -88,6 +85,21 @@ class Navatar extends Base
 	private function setImageQuality($imageQuality)
 	{
 		$this->imageQuality = $imageQuality;
+
+		return $this;
+	}
+
+
+	/**
+	 * Sets current save path
+	 *
+	 * @param $savePath
+	 *
+	 * @return $this
+	 */
+	private function setSavePath($savePath)
+	{
+		$this->savePath = $savePath;
 
 		return $this;
 	}
@@ -259,20 +271,6 @@ class Navatar extends Base
 
 
 	/**
-	 * Sets current save path
-	 *
-	 * @param $savePath
-	 *
-	 * @return $this
-	 */
-	private function setSavePath($savePath)
-	{
-		$this->savePath = $savePath;
-		return $this;
-	}
-
-
-	/**
 	 * Generates Navatar filename
 	 *
 	 * @param $userId
@@ -337,16 +335,28 @@ class Navatar extends Base
 
 
 	/**
-	 * Generates Navatar image
+	 * Returns navatar save path.
 	 *
-	 * @param $data
-	 * @param $path
+	 * @return string
+	 */
+	public function conjureSavePath()
+	{
+		return e_AVATAR_UPLOAD . $this->fileName;
+	}
+
+
+	/**
+	 * Generates Navatar image on failute catches the exception and
+	 *  writes to system log
+	 *
+	 * @return bool
 	 */
 	public function generateNavatar()
 	{
 
-		/**  */
+		/** generate navatar **/
 		try {
+
 			$avatar = new InitialAvatar();
 
 			$avatar->name($this->initialText)->length($this->charLength)
@@ -357,23 +367,26 @@ class Navatar extends Base
 
 		}
 		catch (\Exception $e) {
-			Main::log($e, 'initial-avatar-generate-error', \e_LOG);
-			// todo: on failure e-mail admin & write to admin log
+
+			$exceptionInfo = [
+				'message' => $e->getMessage(),
+				'file'    => $e->getFile(),
+				'line'    => $e->getLine(),
+			];
+
+			$userInfo = [
+				'user_id' => $this->userId,
+			];
+
+			/** write exception to system log **/
+			\e107::getLog()
+				->add('Navatar Generation failed!', $exceptionInfo, E_LOG_FATAL,
+					'NAVATAR_01', LOG_TO_ADMIN, $userInfo);
+
+			return false;
 		}
 
-	}
-
-
-	/**
-	 * Returns navatar save path.
-	 *
-	 * @param $fileName
-	 *
-	 * @return string
-	 */
-	public function conjureSavePath()
-	{
-		return e_AVATAR_UPLOAD . $this->fileName;
+		return true;
 	}
 
 
