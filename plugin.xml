@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Navatar" lan="" version="1.1.0" date="2018-12-24" compatibility="2.0" installRequired="true" >
+<e107Plugin name="Navatar" lan="" version="1.1.2" date="2018-12-24" compatibility="2.0" installRequired="true" >
 	<author name="Arun S. Sekher" url="https://github.com/arunshekher" />
 	<summary lan="">A plugin that generates user avatar that has your initials.</summary>
 	<description lan="">A Plugin that uses initials from your username or real name to create avatar images for users if they haven't uploaded their own avatar images.</description>
@@ -26,48 +26,19 @@
 		<pref name='font_size'>0.5</pref>
 		<pref name='font_variant'>/fonts/NotoSans-Bold.ttf</pref>
 		<pref name='background_colors'>
-#fe4a49
-#2ab7ca
-#fed766
-#f4b6c2
-#f6abb6
-#03396c
-#005b96
-#6497b1
-#651e3e
-#851e3e
-#dec3c3
-#4a4e4d
-#0e9aa7
-#3da4ab
-#f6cd61
-#fe8a71
-#63ace5
-#2a4d69
-#4b86b4
-#adcbe3
-#fe9c8f
-#feb2a8
-#f9caa7
-#009688
-#ee4035
-#f37736
-#fdf498
-#7bc043
-#0392cf
-#96ceb4
-#ffeead
-#ff6f69
-#ffcc5c
-#88d8b0
-#854442
-#be9b7b
-#3b5998
-#a8e6cf
-#dcedc1
-#ffd3b6
-#ffaaa5
-#ff8b94
+#3e4fb4
+#3765d3
+#eb1a22
+#bd081c
+#c6b65f
+#56ae9b
+#feea39
+#7c2f47
+#32132f
+#3e4fb4
+#63b26f
+#795447
+#9a5030
         </pref>
 		<pref name='random_bg_color'>1</pref>
 	</pluginPrefs>
