@@ -2,11 +2,11 @@
 
 namespace Navatar\Plugin\Controllers;
 
-class File extends Base
+class Files extends Base
 {
 	/**
 	 * Public static alias for both non-static remove methods
-	 *  in Navatar\Plugin\Controllers\File
+	 *  in Navatar\Plugin\Controllers\Files
 	 *
 	 * @param mixed $mask
 	 *

@@ -7,7 +7,7 @@ if ( ! getperms('P') || ! e107::isInstalled('navatar')) {
 
 use Navatar\Plugin\Controllers\Fonts;
 use Navatar\Plugin\Models\User;
-use Navatar\Plugin\Controllers\File;
+use Navatar\Plugin\Controllers\Files;
 
 e107::lan('navatar', 'admin', true);
 
@@ -279,7 +279,7 @@ class NavatarAdminTools extends e_admin_ui
 					$mes->addSuccess(LAN_NAVATAR_TIDY_MES_SUC_RECORDS_REMOVED,
 						'navatar-mstack');
 
-					$removal = File::remove('*');
+					$removal = Files::remove('*');
 
 					if (count($removal['fail']) > 0) {
 						$failMessage =
