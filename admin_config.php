@@ -5,7 +5,7 @@ if ( ! getperms('P') || ! e107::isInstalled('navatar')) {
 	exit;
 }
 
-use Navatar\Plugin\Controllers\Font;
+use Navatar\Plugin\Controllers\Fonts;
 use Navatar\Plugin\Models\User;
 use Navatar\Plugin\Controllers\File;
 
@@ -211,7 +211,7 @@ class NavatarAdminMain extends e_admin_ui
 		$this->prefs['user_trigger_event']['writeParms'] = $this->userTrigger;
 		$this->prefs['character_length']['writeParms'] = $this->characterLength;
 		$this->prefs['php_graphics_lib']['writeParms'] = $this->graphicsLibrary;
-		$this->prefs['font_variant']['writeParms'] = Font::index();
+		$this->prefs['font_variant']['writeParms'] = Fonts::index();
 
 	}
 

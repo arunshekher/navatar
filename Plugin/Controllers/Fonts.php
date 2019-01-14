@@ -2,10 +2,10 @@
 
 namespace Navatar\Plugin\Controllers;
 
-class Font extends Base
+class Fonts extends Base
 {
 	/**
-	 * Public static alias for Navatar\Plugin\Controllers\Font::listAll()
+	 * Public static alias for Navatar\Plugin\Controllers\Fonts::listAll()
 	 *
 	 * @return array|null
 	 */
