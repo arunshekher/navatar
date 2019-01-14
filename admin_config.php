@@ -18,7 +18,14 @@ class NavatarAdmin extends e_admin_dispatcher
 	protected $modes = [
 
 		'main' => [
-			'controller' => 'navatar_ui',
+			'controller' => 'NavatarAdminMain',
+			'path'       => null,
+			'ui'         => 'navatar_form_ui',
+			'uipath'     => null,
+		],
+
+		'tools' => [
+			'controller' => 'NavatarAdminTools',
 			'path'       => null,
 			'ui'         => 'navatar_form_ui',
 			'uipath'     => null,
@@ -29,9 +36,9 @@ class NavatarAdmin extends e_admin_dispatcher
 
 	protected $adminMenu = [
 
-		'main/prefs'  => ['caption' => LAN_PREFS, 'perm' => 'P'],
-		'main/div0'   => ['divider' => true],
-		'main/tidyup' => ['caption' => 'Tidy-up Wizard', 'perm' => 'P'],
+		'main/prefs'   => ['caption' => LAN_PREFS, 'perm' => 'P'],
+		'main/div0'    => ['divider' => true],
+		'tools/tidyup' => ['caption' => 'Tidy-up Wizard', 'perm' => 'P'],
 
 	];
 
@@ -43,12 +50,11 @@ class NavatarAdmin extends e_admin_dispatcher
 }
 
 
-class navatar_ui extends e_admin_ui
+class NavatarAdminMain extends e_admin_ui
 {
 
 	protected $pluginTitle = 'Navatar';
 	protected $pluginName = 'navatar';
-	//	protected $eventName		= 'navatar-'; // remove comment to enable event triggers in admin. 		
 
 	protected $preftabs = ['General', 'Text', 'Color', 'Font', 'Schedule'];
 
@@ -210,6 +216,26 @@ class navatar_ui extends e_admin_ui
 	}
 
 
+	public function renderHelp()
+	{
+		$template = e107::getTemplate('navatar', 'project_menu');
+		$text = e107::getParser()->parseTemplate($template, true, [
+			'DEV_SUPPORT' => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT,
+			'SIGN'        => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT_SIGN,
+		]);
+
+		return [
+			'caption' => LAN_NAVATAR_INFO_MENU_TITLE,
+			'text'    => $text,
+		];
+
+	}
+
+}
+
+
+class NavatarAdminTools extends e_admin_ui
+{
 	public function tidyupPage()
 	{
 		$tp = e107::getParser();
@@ -279,33 +305,6 @@ class navatar_ui extends e_admin_ui
 		return false;
 	}
 
-
-	public function renderHelp()
-	{
-		$template = e107::getTemplate('navatar', 'project_menu');
-		$text = e107::getParser()->parseTemplate($template, true, [
-			'DEV_SUPPORT' => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT,
-			'SIGN'        => LAN_NAVATAR_INFO_MENU_SUPPORT_DEV_TEXT_SIGN,
-		]);
-
-		return [
-			'caption' => LAN_NAVATAR_INFO_MENU_TITLE,
-			'text'    => $text,
-		];
-
-	}
-
-
-	protected function listFiles()
-	{
-		$files = [];
-		foreach (glob(e_AVATAR_UPLOAD . '*_navatar.png') as $filename) {
-			$files[] = "$filename size: " . filesize($filename);
-		}
-
-		return $files;
-	}
-
 }
 
 
@@ -322,4 +321,3 @@ e107::getAdminUI()->runPage();
 
 require_once e_ADMIN . 'footer.php';
 exit;
-
