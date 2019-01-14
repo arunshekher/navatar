@@ -5,7 +5,7 @@ namespace Navatar\Plugin\Controllers;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 use Navatar\Plugin\Models\User;
 
-class Navatar extends Base
+class Navatars extends Base
 {
 
 	/**
