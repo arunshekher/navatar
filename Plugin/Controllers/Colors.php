@@ -2,11 +2,11 @@
 
 namespace Navatar\Plugin\Controllers;
 
-class Color extends Base
+class Colors extends Base
 {
 
 	/**
-	 * Public static alias for Navatar\Plugin\Controllers\Color::randomColor()
+	 * Public static alias for Navatar\Plugin\Controllers\Colors::randomColor()
 	 *
 	 * @return string
 	 */
@@ -46,7 +46,7 @@ class Color extends Base
 
 
 	/**
-	 * Public static alias for Navatar\Plugin\Controllers\Color::exactColor()
+	 * Public static alias for Navatar\Plugin\Controllers\Colors::exactColor()
 	 * @return string
 	 */
 	public static function exact()

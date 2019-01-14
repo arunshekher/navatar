@@ -327,10 +327,10 @@ class Navatars extends Base
 	private function determineBgColor()
 	{
 		if ($this->prefs['random_bg_color']) {
-			return Color::random();
+			return Colors::random();
 		}
 
-		return Color::exact();
+		return Colors::exact();
 	}
 
 
