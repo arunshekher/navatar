@@ -45,7 +45,5 @@
 	<dependencies>
 		<PHP name='core' min_version='5.6' />
 		<extension name='fileinfo' />
-		<extension name='gd' />
-		<extension name='imagick' />
 	</dependencies>
 </e107Plugin>
