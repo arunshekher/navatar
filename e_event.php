@@ -10,23 +10,17 @@
 
 if (!defined('e107_INIT')) { exit; }
 
+use Navatar\Plugin\Controllers\Navatar;
+require_once __DIR__ . '/vendor/autoload.php';
 
 class navatar_event
 {
 
-	/**
-	 * Configure functions/methods to run when specific e107 events are triggered.
-	 * 
-	 * For a list of core events, please visit: http://e107.org/developer-manual/classes-and-methods#events
-	 * 
-	 * Developers can trigger their own events using: e107::getEvent()->trigger('plugin_event', $array);
-	 * Where 'plugin' is the folder of their plugin and 'event' is a unique name of the event.
-	 * Other plugins can then 'listen' to this custom event by defining it in THEIR e_event.php addon within the config() method. 
-	 * 
-	 * $array is data which is sent to the triggered function. eg. myfunction($array) in the example below.
-	 *
-	 * @return array
-	 */
+	public function __construct( protected Navatar $navatar = new Navatar())
+	{
+		
+	}
+
 	public function config()
 	{
 
@@ -50,6 +44,7 @@ class navatar_event
 
 	public function myfunction($data) // the method to run.
 	{
+		$this->navatar->assignNavatar($data);
 		// var_dump($data);
 	}
 
