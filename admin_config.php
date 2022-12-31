@@ -8,6 +8,7 @@ if ( ! getperms('P') || ! e107::isInstalled('navatar')) {
 use Navatar\Plugin\Controllers\Font;
 use Navatar\Plugin\Models\User;
 use Navatar\Plugin\Controllers\File;
+//require_once __DIR__ . '/vendor/autoload.php';
 
 e107::lan('navatar', 'admin', true);
 

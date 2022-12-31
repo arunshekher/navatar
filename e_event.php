@@ -11,12 +11,15 @@
 if (!defined('e107_INIT')) { exit; }
 
 use Navatar\Plugin\Controllers\Navatar;
+use Navatar\Plugin\Main;
 require_once __DIR__ . '/vendor/autoload.php';
 
-class navatar_event
+class navatar_event /** todo: base it on a Listenable interface */
 {
 
-	public function __construct( protected Navatar $navatar = new Navatar())
+	public function __construct(
+		private $currentEventName = '', 
+		protected Navatar $navatar = new Navatar())
 	{
 		
 	}
@@ -35,7 +38,7 @@ class navatar_event
 		// Example 2: core plugin event ("user_forum_post_created")
 		$event[] = array(
 			'name'		=> "user_signup_activated", // event triggered in the forum plugin when a user submits a new forum post 
-			'function'	=> "myfunction", // ..run this function (see below). You can run the same function on different events. 
+			'function'	=> "anotherfunction", // ..run this function (see below). You can run the same function on different events. 
 		);
 	
 		return $event;
@@ -44,13 +47,27 @@ class navatar_event
 
 	public function myfunction($data) // the method to run.
 	{
-		$this->navatar->assignNavatar($data);
+		$this->eventData = $data;
+		//$this->navatar->assignNavatar($data);
+		$this->log();
 		// var_dump($data);
 	}
 
 	public function anotherfunction($data) // the method to run.
 	{
+		$this->eventData = $data;
+		//$this->navatar->assignNavatar($data);
+		$this->log();
 		// var_dump($data);
+	}
+
+
+	private function log(): void
+	{
+		file_put_contents(
+			\e_PLUGIN . 'navatar/event-test-logs.txt', 
+			var_export($this, true) . PHP_EOL, 
+			FILE_APPEND);
 	}
 
 } 
